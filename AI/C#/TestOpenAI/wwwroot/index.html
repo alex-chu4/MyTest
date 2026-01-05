@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AI Chatbot</title>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>-->
+    <script src="signalr.min.js"></script>
+</head>
+<body style="font-family:Arial; padding:20px;">
+    <h2>🤖 AI Chatbot</h2>
+
+    <div id="chat" style="border:1px solid #ccc; height:300px; overflow:auto; padding:10px;"></div>
+
+    <input type="text" id="messageInput" placeholder="Type your message..." style="width:80%;" />
+    <br />
+    <span>範例1. 列舉3樣台北美食?</span>
+    <br />
+    <span>範例2. C#字串反轉方法?</span>
+    <br />
+    <span>範例3. Generate a SQL query to fetch all employees with salary > 50000 ?</span>
+    <br />
+    <span>範例4. Write NUnit test cases for a C# function that adds two numbers ?</span>
+    <br />
+    <center>
+        <button style="color:green;font-weight:bold;" onclick="Clear()">Clear</button>
+        &nbsp;&nbsp;&nbsp;
+        <button style="color:crimson;font-weight:bold;" onclick="sendMessage()">Send</button>
+    </center>
+
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chatHub")
+            .build();
+
+        connection.on("ReceiveMessage", (user, message) => {
+            const msg = document.createElement("div");
+            msg.innerHTML = `<b>${user}:</b> ${message}`;
+            document.getElementById("chat").appendChild(msg);
+        });
+
+        connection.start().catch(err => console.error(err.toString()));
+
+        function sendMessage() {
+            const message = document.getElementById("messageInput").value;
+            connection.invoke("SendMessage", "User", message);
+            document.getElementById("messageInput").value = "";
+        }
+
+        function Clear() {
+            document.getElementById("chat").innerHTML = "";
+            document.getElementById("messageInput").value = "";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+wwwroot\index.html
+wwwroot\signalr.min.js
+C:\Users\Administrator\Documents\Visual Studio 2022\Projects\TestOpenAI\TestOpenAIWeb\wwwroot\index.html
+C:\Users\Administrator\Documents\Visual Studio 2022\Projects\TestOpenAI\TestOpenAIWeb\wwwroot\signalr.min.js

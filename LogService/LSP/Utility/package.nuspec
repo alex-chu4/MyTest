@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <!--*-->
+    <id>Utility</id>
+    <!--*-->
+    <version>1.0.3.25</version>
+    <title>Utility</title>
+    <!--*-->
+    <authors>NEC</authors>
+    <owners>NEC</owners>
+    <!--
+    <licenseUrl></licenseUrl>
+    <projectUrl></projectUrl>
+    <iconUrl></iconUrl>
+-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <!--*-->
+    <description>"NEC.Utility
+ 
+
+
+- 2019/11/26_10:00_1.0.3.25 "  ~ SendMessage() 與 LogQueueDataModel 相關調整</description>
+    <!--*-->
+    <releaseNotes>NEC.Utility Version 1.0.3.25</releaseNotes>
+    <copyright>Copyright ©  2019</copyright>
+    <tags>
+    </tags>
+    <dependencies>
+      <!--
+      <dependency id="SampleDependency" version="1.0" />
+-->
+    </dependencies>
+  </metadata>
+</package>

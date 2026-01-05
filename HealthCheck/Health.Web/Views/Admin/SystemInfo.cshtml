@@ -1,0 +1,183 @@
+﻿@{
+    ViewBag.Title = "System";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            queryOnClick();
+        });
+
+        function queryOnClick() {
+            $("#resultTable tbody tr").remove();
+
+            var filter = {
+                NAME: $("#qNAME").val()
+            }
+
+            $("#infos .modal-body").html("<span style='font-size:24px'><i class='fa fa-spinner fa-spin'></i>查詢中…</span>");
+            $("#infos").modal("show");
+
+            $.ajaxPost("@Url.Content("~/SystemInfo/Search")", filter, function (data) {
+                $("#infos").modal("hide");
+                if ((data != null) && (data.length > 0)) {
+                    $.each(data, function (index, item) {
+                        var html = "";
+
+                        html += "<tr>";
+                        html += "  <td>";
+                        html += "    <input type='hidden' id='" + item.OID + "' value='" + JSON.stringify(item) + "' />";
+                        html += "    <button type='button' onclick='editOnClick(\"" + item.OID + "\");'>編輯</button>&nbsp;&nbsp;";
+                        html += "    <button type='button' onclick='delOnClick(\"" + item.OID + "\");'>刪除</button>";
+                        html += "  </td>";
+                        html += "  <td class='text-center'>" + item.ID + "</td>";
+                        html += "  <td class='text-left'>" + item.NAME + "</td>";
+                        html += "  <td class='text-left'>" + (item.DESC != null ? item.DESC : "") + "</td>";
+                        html += "  <td class='text-right'>" + (item.THRESHOLD != null ? item.THRESHOLD : "") + "</td>";
+                        html += "  <td class='text-center'>" + (item.KEY_FUNCTION != null && item.KEY_FUNCTION ? "是" : "否") + "</td>";
+                        html += "  <td class='text-center'>" + moment(item.CREATE_TIME).format("YYYY-MM-DD HH:mm:ss") + "</td>";
+                        html += "  <td class='text-center'>" + (item.UPDATE_TIME != null ? moment(item.UPDATE_TIME).format("YYYY-MM-DD HH:mm:ss") : "") + "</td>";
+                        html += "</tr>";
+
+                        $("#resultTable tbody").append(html);
+                    });
+                }
+            });
+        }
+
+        function newOnClick() {
+            var obj = {
+                OID: "",
+                ID: "",
+                NAME: "",
+                DESC: "",
+                THRESHOLD: "5",
+                KEY_FUNCTION: false
+            };
+            setFormFields(obj);
+
+            $("#actionType").text("新增");
+            $("#systemInfo").modal("show");
+        }
+
+        function editOnClick(oid) {
+            var obj = JSON.parse($("#" + oid).val());
+            setFormFields(obj);
+
+            $("#actionType").text("編輯");
+            $("#systemInfo").modal("show");
+        }
+
+        function confirmOnClick() {
+            var actionType = $("#actionType").text();
+            var obj = {
+                OID: $("#fOID").val(),
+                ID: $("#fID").val(),
+                NAME: $("#fNAME").val(),
+                DESC: $("#fDESC").val(),
+                THRESHOLD: $("#fTHRESHOLD").val(),
+                KEY_FUNCTION: $("#fKEY_FUNCTION").prop("checked")
+            };
+
+            if ((obj.ID === "") || (obj.NAME === "")) {
+                alert("ID及名稱不能為空值！");
+            }
+            else {
+                var url = (actionType == "新增") ? "@Url.Content("~/SystemInfo/Create")" : "@Url.Content("~/SystemInfo/Update")";
+                $.ajaxPost(url, obj, function (data) {
+                    $("#systemInfo").modal("hide");
+                    queryOnClick();
+                });
+            }
+        }
+
+        function delOnClick(oid) {
+            var obj = JSON.parse($("#" + oid).val());
+
+            if (confirm("確認刪除" + obj.ID + "：" + obj.NAME + "？")) {
+                $.ajaxPost("@Url.Content("~/SystemInfo/Delete")", obj, function (data) {
+                    queryOnClick();
+                });
+            }
+        }
+
+        function setFormFields(obj) {
+            $("#fOID").val(obj.OID);
+            $("#fID").val(obj.ID);
+            $("#fNAME").val(obj.NAME);
+            $("#fDESC").val(obj.DESC);
+            $("#fTHRESHOLD").val(obj.THRESHOLD);
+            $("#fKEY_FUNCTION").prop("checked", obj.KEY_FUNCTION);
+        }
+    </script>
+}
+<br />
+<div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-6 col-xs-12">
+        <label>名稱：</label>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+        <input type="text" id="qNAME" class="form-control" />
+    </div>
+    <div class="col-lg-offset-7 col-md-offset-7 col-lg-2 col-md-2 col-sm-12 col-xs-12">
+        <button type="button" class="btn btn-primary" onclick="queryOnClick();">查詢</button>
+        <button type="button" class="btn btn-default" onclick="newOnClick();">新增</button>
+    </div>
+</div>
+<br />
+<div class="table-responsive">
+    <table id="resultTable" class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th class="text-center">ID</th>
+                <th class="text-center">NAME</th>
+                <th class="text-center">DESC</th>
+                <th class="text-center">THRESHOLD</th>
+                <th class="text-center">KEY FUNCTION</th>
+                <th class="text-center">建立時間</th>
+                <th class="text-center">異動時間</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+<div class="modal fade" id="systemInfo" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><span class="glyphicon glyphicon-lock"></span><span id="actionType"></span></h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="fOID" />
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">ID：</div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <input type="text" id="fID" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">NAME：</div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <input type="text" id="fNAME" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">DESC：</div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <input type="text" id="fDESC" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">THRESHOLD：</div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <input type="text" id="fTHRESHOLD" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">KEY FUNCTION：</div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <input type="checkbox" id="fKEY_FUNCTION" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary pull-left" onclick="confirmOnClick();"><span class="glyphicon glyphicon-remove"></span> 確認</button>
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> 取消</button>
+            </div>
+        </div>
+    </div>
+</div>

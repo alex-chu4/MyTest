@@ -1,0 +1,1627 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0F72EDDF-FA81-4CA9-B2A6-DC3A4800EB3B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EMIC2.Models</RootNamespace>
+    <AssemblyName>EMIC2.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Relese166|AnyCPU'">
+    <OutputPath>bin\Relese166\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release166|AnyCPU'">
+    <OutputPath>bin\Release166\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseTest|AnyCPU'">
+    <OutputPath>bin\ReleaseTest\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'EMIC.Test|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\EMIC.Test\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'EMIC.Dev|AnyCPU'">
+    <OutputPath>bin\EMIC.Dev\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'EMIC.Prod|AnyCPU'">
+    <OutputPath>bin\EMIC.Prod\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.60.6\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Util.WebClass, Version=4.0.0.0, Culture=neutral, PublicKeyToken=a7987b61c51ca872, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\EMIC2.Commons\packages\Util.WebClass.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AggregatedCounter.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COM2_ACCOUNT_TYPE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COM2_CITYTOWN_ID.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COM2_CITYTOWN_WGS84.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COM2_COUNTRY_ID.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COM2_EOC_ID.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COM2_FILES_UPLOAD.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COM2_OID.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COM2_OID_TYPE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COM2_PERSON_INFO.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COM2_SYS_CODE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Counter.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C__MigrationHistory.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dao\COMMON\CommonDIM2Dao.cs" />
+    <Compile Include="Dao\COMMON\CommonEDD2Dao.cs" />
+    <Compile Include="Dao\COMMON\CommonEEM2Dao.cs" />
+    <Compile Include="Dao\COMMON\CommonERA2Dao.cs" />
+    <Compile Include="Dao\COMMON\CommonNTT2Dao.cs" />
+    <Compile Include="Dao\COMMON\CommonSSO2Dao.cs" />
+    <Compile Include="Dao\DIM\DIMDao.cs" />
+    <Compile Include="Dao\Dto\COMMON\EEM2_QRY_EOC_PRJ_Dto.cs" />
+    <Compile Include="Dao\Dto\COMMON\OrgEocPrjDto.cs" />
+    <Compile Include="Dao\Dto\DIM\DIM2010301\ResultResourceDto.cs" />
+    <Compile Include="Dao\Dto\DIM\DIM2010301\SearchResourceDto.cs" />
+    <Compile Include="Dao\Dto\DIM\DIM2050101\ProjectModelDto.cs" />
+    <Compile Include="Dao\Dto\DIM\DIM2050101\SearchProjectDto.cs" />
+    <Compile Include="Dao\Dto\DIM\DIMCaseDto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2010102\EDD2010102ResourceDto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020202\EDD2020202Dto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020202\EDD2020202SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020301\EDD2020301Dto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020302\EDD2_020302_DDto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020302\EDD2_020302_MDto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020303\EDD2020303_Create_Result_Dto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020401\EDD2020401_Unit_Resource_Dto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020402\EDD2020402SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020402\EDD2_020402_MDto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020403\EDD2020403Dto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020405\EDD2_020405_DDto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020405\EDD2_020405_MDto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020405\EDD2020405SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020406\DetailModelDto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020406\DetailSearchModelDto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020406\DetailTableModelDto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020406\DetailViewModelDto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020406\ResultModelDto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020406\SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020503\EDD2020503Dto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020504\EDD2020504Dto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020602\EDD2020602Dto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020604\EDD2020604Dto.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020605\EDD2020605Dto.cs" />
+    <Compile Include="Dao\Dto\EDD2\ResourceItemModelDto.cs" />
+    <Compile Include="Dao\Dto\EDD2\RESOURCE_ITEM_ALLDto.cs" />
+    <Compile Include="Dao\Dto\EEM2\EEM2010303\EEM2010303Dto.cs" />
+    <Compile Include="Dao\Dto\EEM2\EEM2010501Dto.cs" />
+    <Compile Include="Dao\Dto\EEM2\EEM2010801Dto.cs" />
+    <Compile Include="Dao\Dto\EEM2\EEM2010102Dto.cs" />
+    <Compile Include="Dao\Dto\EEM2\EEM2990104\EEM2990104Dto.cs" />
+    <Compile Include="Dao\Dto\EEM2\EEM2990104\EEM2990104PartDto.cs" />
+    <Compile Include="Dao\Dto\EEM2\EEM2990105Dto.cs" />
+    <Compile Include="Dao\Dto\ERA2Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2020103\ERA2020103Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2020141\ERA2020141Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030102\ERA2030102Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030102\ERA2030102SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030107\ERA2030107Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030107\ERA2030107SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030108\ERA2030108Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030108\ERA2030108SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030123\ERA2030123SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030122\ERA2030122SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030109\ERA2030109Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030109\ERA2030109SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030111\ERA2030111Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030111\ERA2030111SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030113\ERA2030113Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030113\ERA2030113SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030114\ERA2030114Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030114\ERA2030114SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030116\ERA2030116Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030116\ERA2030116SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030117\ERA2030117Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030117\ERA2030117SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030118\ERA2030118Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030118\ERA2030118SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030120\ERA2030120Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030120\ERA2030120SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030121\ERA2030121Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030121\ERA2030121SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030124\ERA2030124Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030124\ERA2030124SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030127\ERA2030127Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030127\ERA2030127SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030130\ERA2030130Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030130\ERA2030130SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030133\ERA2030133Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA2030133\ERA2030133SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA20401\ERA20401Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA20402\ERA20402Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA20403\ERA20403Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA20404\ERA20404Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA20405\ERA20405.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA20501\ERA20501Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA20501\ERA20501SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA20502\ERA20502Dto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA20502\ERA20502SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\ERA20521\ERA2_CHECK_EXT_TAG.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\BaseModelDto.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_A1.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_A2.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_A4.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_C1.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_C2.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_C3.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_B1.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_D1.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_D2.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_D4.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_E3.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_E5.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_E6.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_E7.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_E8.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_E9.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F1_S.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F52.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F51.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F43.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F53.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F42.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F41.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F31.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F33.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F32.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F23.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F21.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F22.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F2.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F3.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F4.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F5.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F7.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F6.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_C4.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_D3.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_E1.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_E2.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_E4.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F1.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_G1.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_H1.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_J2.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_F8.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_J1.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_J4.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_J5.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_K1.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_J3.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\ERA2_QRY_MAX_A3.cs" />
+    <Compile Include="Dao\Dto\ERA\Model\SearchModelDto.cs" />
+    <Compile Include="Dao\Dto\FIS2\FIS2010105Dto.cs" />
+    <Compile Include="Dao\Dto\FIS2\FIS2010106Dto.cs" />
+    <Compile Include="Dao\Dto\FIS2\FIS2990104Dto.cs" />
+    <Compile Include="Dao\Dto\HEALTH_DB\HEALTH_HIS2Dto.cs" />
+    <Compile Include="Dao\Dto\NDS2\EocProjectDto.cs" />
+    <Compile Include="Dao\Dto\SSO2\SSO2020708Dto.cs" />
+    <Compile Include="Dao\Dto\SSO2\SSO2020701Dto.cs" />
+    <Compile Include="Dao\Dto\SSO2\SSO2020703Dto.cs" />
+    <Compile Include="Dao\Dto\SSO2\SSO2020706Dto.cs" />
+    <Compile Include="Dao\Dto\SSO2\SSO2020704Dto.cs" />
+    <Compile Include="Dao\Dto\SSO2\SSO2020702Dto.cs" />
+    <Compile Include="Dao\Dto\SSO2\SSO2020707Dto.cs" />
+    <Compile Include="Dao\Dto\SSO2\SSO2020705Dto.cs" />
+    <Compile Include="Dao\Dto\EDD2\BaseModelDto.cs" />
+    <Compile Include="Dao\EDD2\EDD2020202\EDD2020202Dao.cs" />
+    <Compile Include="Dao\EDD2\EDD2020303\EDD2020303Dao.cs" />
+    <Compile Include="Dao\EDD2\EDD2020401\EDD2020401Dao.cs" />
+    <Compile Include="Dao\EDD2\EDD2020406\EDD2020406Dao.cs" />
+    <Compile Include="Dao\EDD2\EDD2020502\EDD2020502Dao.cs" />
+    <Compile Include="Dao\EDD2\EDD2020101\EDD2020101Dao.cs" />
+    <Compile Include="Dao\EDD2\EDD2020201\EDD2020201Dao.cs" />
+    <Compile Include="Dao\EDD2\EDD2020301\EDD2020301Dao.cs" />
+    <Compile Include="Dao\EDD2\EDD2020302\EDD2020302Dao.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020302\EDD2_020302_M_SearchModelDto.cs" />
+    <Compile Include="Dao\EDD2\EDD2020402\EDD2020402Dao.cs" />
+    <Compile Include="Dao\EDD2\EDD2020403\EDD2020403Dao.cs" />
+    <Compile Include="Dao\EDD2\EDD2020405\EDD2020405Dao.cs" />
+    <Compile Include="Dao\EDD2\EDD2020503\EDD2020503Dao.cs" />
+    <Compile Include="Dao\EDD2\EDD2020504\EDD2020504Dao.cs" />
+    <Compile Include="Dao\EDD2\EDD2020602\EDD2020602Dao.cs" />
+    <Compile Include="Dao\EDD2\EDD2020604\EDD2020604Dao.cs" />
+    <Compile Include="Dao\EDD2\EDD2020605\EDD2020605Dao.cs" />
+    <Compile Include="Dao\EDD2\EDD2020\EDD2020Dao.cs" />
+    <Compile Include="Dao\EDD2\EDD2Dao.cs" />
+    <Compile Include="Dao\EEM2\EEM2010303Dao.cs" />
+    <Compile Include="Dao\EEM2\EEM2990104Dao.cs" />
+    <Compile Include="Dao\EEM2\EEM2990105Dao.cs" />
+    <Compile Include="Dao\EEM2\EEM2Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2020116\ERA2020116Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2020117\ERA2020117Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2030123\ERA2030123Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2030122\ERA2030122Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2020109\ERA2020109Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2020114\ERA2020114Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2020123Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2020150Dao.cs" />
+    <Compile Include="Dao\ERA\ERA20202\ERA20202Dao.cs" />
+    <Compile Include="Dao\ERA\ERA20203\ERA20203Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2020103\ERA2020103Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2020141\ERA2020141Dao.cs" />
+    <Compile Include="Dao\ERA\ERA20201\ERA20201Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2030102\ERA2030102Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2030107\ERA2030107Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2030108\ERA2030108Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2030109\ERA2030109Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2030111\ERA2030111Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2030113\ERA2030113Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2030114\ERA2030114Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2030116\ERA2030116Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2030117\ERA2030117Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2030118\ERA2030118Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2030120\ERA2030120Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2030121\ERA2030121Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2030124\ERA2030124Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2030127\ERA2030127Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2030130\ERA2030130Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2030133\ERA2030133Dao.cs" />
+    <Compile Include="Dao\ERA\ERA20301\ERA20301Dao.cs" />
+    <Compile Include="Dao\ERA\ERA20302\ERA20302Dao.cs" />
+    <Compile Include="Dao\ERA\ERA20303\ERA20303Dao.cs" />
+    <Compile Include="Dao\ERA\ERA203\ERA203Dao.cs" />
+    <Compile Include="Dao\ERA\ERA20401\ERA20401Dao.cs" />
+    <Compile Include="Dao\ERA\ERA20402\ERA20402Dao.cs" />
+    <Compile Include="Dao\ERA\ERA20403\ERA20403Dao.cs" />
+    <Compile Include="Dao\ERA\ERA20404Dao.cs" />
+    <Compile Include="Dao\ERA\ERA20405Dao.cs" />
+    <Compile Include="Dao\ERA\ERA20501\ERA20501Dao.cs" />
+    <Compile Include="Dao\ERA\ERA20502\ERA20502Dao.cs" />
+    <Compile Include="Dao\ERA\ERA2Dao.cs" />
+    <Compile Include="Dao\ERA\OPEDDATA\OPEDDATADao.cs" />
+    <Compile Include="Dao\FIS2\FIS2990104Dao.cs" />
+    <Compile Include="Dao\FIS2\FIS2Dao.cs" />
+    <Compile Include="Dao\HEALTH_DB\HealthDao.cs" />
+    <Compile Include="Dao\NDS2\EocProjectDao.cs" />
+    <Compile Include="Dao\SSO2\SSODao.cs" />
+    <Compile Include="DIM2_CASE_ASSIGN_LIST.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_CASE_CLOSEING.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_CASE_HIGHLIGHT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_CASE_INFO.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_CASE_INFO_ADDITYPE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_CASE_INFO_RENEW.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_CASE_INJURE_INFO.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_CASE_JOB_TODO.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_CASE_POWER_UNIT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_CASE_REPLY.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_DIS_MAP_RESOURCE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_DIS_TYPE_MAPPING.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_DIS_TYPE_UNIT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_INTER_CASE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_SYS_CITY_OPEN.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_SYS_CODE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_SYS_CODE_TYPE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_SYS_MERGE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_SYS_PARAM.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_SYS_REGISTY.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_SYS_SEQNO.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_TASK_ASSIGN_LIST.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_TASK_INFO.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_TASK_REPLY.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_TASK_REPLY_HIS.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIM2_UPLOAD_FILE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP2_DI_DEBRISINFO.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP2_RSM_LOCATION.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP2_RSM_MASTER_TYPE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP2_RSM_MATERIAL_MASTER.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP2_RSM_SECONDARY_TYPE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP2_RSM_STOCK_DETAIL.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_CHECKCONN.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_CHECKLINK.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_CHECKLOG.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_DEBRISFLOWALT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_DEBRISFLOWEFFECT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_DEBRISFLOWINFO.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_DIR_MNG.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_DM_CABINET.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_DM_DATA.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_EQALT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_EQINFO.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_EQ_LOCALMAXINTENSITY.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_EXTRAINALT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_EXTRAINAREA.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_EXTRAININFO.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_FLOODWARNALT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_FLOODWARNEFFECT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_FLOODWARNINFO.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_SCH_LOG.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_SCH_MAIN.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_THBBOBEALT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_THBBOBEALTEFFECT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_THBBOBEALTINFO.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_THSRCALT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_THSRCAREA.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_THSRCINFO.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_TRAALT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_TRAAREA.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_TRAINFO.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_TYPHOONALT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_TYPHOONDESC.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_TYPHOONINFO.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_WORD_MNG.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_WRKSCHLCLSALT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_WRKSCHLCLSAREA.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_WRKSCHLCLSINFO.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_WS_CLIENT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_WS_LOG.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_WS_PACKAGE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSP_WS_WWMAP.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_AUDITING_OPERATION.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_AUDITING_UNIT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_AUDTING_RECORD.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_CODETABLE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_DETAIL_TYPE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_FUNCTION.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_FUNCTION_PRIVILEGE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_ITEM_GROUP_PAR.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_LOCATION_MASTER.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_MASTER_TYPE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_MTMP_REC.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_MTMP_XLS_RESOURCE_STOCK_DATA.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_REQUEST_RESPONSE_RECORD.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_RESOURCE_CHECK_RECORD.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_RESOURCE_IMPORT_ERROR.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_RESOURCE_ITEM.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_RESOURCE_REQUEST.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_RESOURCE_REQUEST_RECORD.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_RESOURCE_STOCK_DATA.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_RESOURCE_STOCK_RECORD.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_RESPONSE_EOC.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_SECONDARY_TYPE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_SPOT_CHECK.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_SPOT_CHECK_DETAIL.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_SPOT_CHECK_RESOURCE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_SPOT_CHECK_UNIT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_SP_ERROR_LOG.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_UNIT_LOCATION.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_UNIT_MASTER.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_UNIT_RELATION.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDD2_UOM.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEA2_CONTACTS.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEA2_CONTACT_DIVISION.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEA2_CONTACT_GROUP.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEA2_EVACUATE_AREA.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEA2_EVACUATE_REPORT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEA2_HOSPITALS.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEA2_MAPINFO.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEA2_RESIDENTS.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEA2_SHELTERS.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEA2_SHELTER_REPORT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEA2_SHELTER_STATUS.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEA2_SYS_CODE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEA2_SYS_CODE_TYPE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEA2_TRANSPORTERS.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEA2_TRANSPORTER_CARTYPE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEA2_TRANSPORTER_LIST.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_A0_CONFIG.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_BOARD_BASE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_BOARD_DETAIL.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_BOARD_MAIN.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_COORD_REPORT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_DIS_ADMIN_ORG.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_DIS_DATA.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_EOC_DATA.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_EOC_GROUP.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_EOC_GROUP_ORG.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_EOC_PRJ.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_EOC_PRJ_HISTORY.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_EOC_PRJ_OLD.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_EVENT_COMM.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_EVENT_LIST.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_EVENT_OTHER.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_EVENT_PHONE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_EVENT_SUPPORT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_EVENT_VISITOR.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_MAJOR_PRJ.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_NEWS_CHANNEL.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_NEWS_DLINK.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_NEWS_INVEST.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_NEWS_MERGE_MAIN.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_NEWS_MERGE_REC.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_NEWS_TASK_ASSIGN.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_NEWS_TLINK.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_NEWS_TRANSFER.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_NEWS_WATCH.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_ORG_INFO.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_RELEASE_DATA.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_RELEASE_TEMPLATE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_SIGNIN.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_WORK_FILE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_WORK_ITEM.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_WORK_ITEM_ORG.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_WORK_ITEM_REPLY.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_WORK_ITEM_REPLY_FILE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EEM2_WORK_MAIN.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EMIC2.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EMIC2.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EMIC2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EMIC2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EMIC2.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EMIC21.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EMIC2.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EMIC22.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EMIC22.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EMIC2.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EMIC23.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EMIC2.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EMIC2Entities.cs" />
+    <Compile Include="EMP2_LINK.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EMP2_MENU_TREE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EMP2_MESSAGE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EMP2_TODO.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_APC_CITYTOWN_ID.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_ATMP_A1a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_ATMP_A2a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_ATMP_A3a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_ATMP_A4a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_ATMP_C1.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_ATMP_C2.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_ATMP_C4.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_ATMP_D1a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_ATMP_D2a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_ATMP_D3a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_ATMP_D4a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_ATMP_E2.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_ATMP_E5a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_ATMP_E6a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_ATMP_E6b.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_ATMP_F1a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_ATMP_G1.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_ATMP_MAIN.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_ATMP_REC.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_CODETABLE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_AIR_CANCEL.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_ALERT_AREAS.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_BRIDGE_CLOSED.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_CASUALTIES.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_CONTENT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_DETAIL.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_DISPATCH_HELICOPTER.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_EARTHQUAKE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_EVACUATE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_FISHERMEN_PLACE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_HIGHRISK_AREAS.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_INDUSTRY_LOSE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_INTENSITY.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_LANDSLIDE_ALERT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_LIFELINES_DAMAGES.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_LOCAL_FLOOD.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_MAIN.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_MANPOWER.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_MOUNTAIN_CONTACT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_PEOPLE_CAMP.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_PEOPLE_MISSING.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_PRIVILEGE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_RAILROAD_CANCEL.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_RAINFALL.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_REFUGE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_RESPONSE_TEAM.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_ROADS_BLOCKED.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_STATE_SITUATION.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_STYLE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_SUPPORT_CITY.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_TRAFFIC_BLOCK.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_TSUNAMI.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_WATER_RESOURCE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_DISP_WIND.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_E1.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_F1.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_F21.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_F22.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_F23.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_F31.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_F32.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_F33.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_F41.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_F42.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_F43.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_F51.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_F52.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_F53.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_F6.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_F7.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_F8.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_J1.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_J2.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_J3.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_J4.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_J5.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_MAIN.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_MTMP_REC.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_A1.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_A1a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_A2.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_A2a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_A3.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_A3a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_A4.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_A4a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_B1.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_C1.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_C2.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_C3.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_C4.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_D1.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_D1a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_D2.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_D2a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_D3.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_D3a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_D4.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_D4a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_DEF.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_E1.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_E2.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_E3.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_E4.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_E5.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_E5a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_E6.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_E6a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_E6b.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_E7.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_E8.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_E9.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_F1.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_F1a.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_F1a_S.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_F1_S.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_F1_SET_ORG.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_F21.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_F22.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_F23.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_F31.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_F32.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_F33.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_F41.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_F42.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_F43.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_F51.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_F52.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_F53.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_F6.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_F7.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_F8.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_G1.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_H1.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_H1_S.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_J1.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_J2.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_J3.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_J4.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_J5.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_K1.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_MAIN.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_RPT_PRIVILEGE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERA2_SP_ERROR_LOG.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FIS2_ACTION_LOG.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FIS2_ADMINISTRATOR.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FIS2_EMS_DNAME.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FIS2_EMS_PATIENT.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FIS2_LOOKFOR.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FIS2_SEARCH_MAIN.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FIS2_STARTUP.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FIS2_STAY_HERE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FIS2_SYS_CONFIG.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FIS2_UI_FUNCTION.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FTS_FU_FILES.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FTS_FU_META.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FTS_FU_TEMPL.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Hash.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\ConnectionHelper.cs" />
+    <Compile Include="Helper\CryptographyEx.cs" />
+    <Compile Include="Helper\DBHelper.cs" />
+    <Compile Include="Interface\COMMON\ICommonDIM2Dao.cs" />
+    <Compile Include="Interface\COMMON\ICommonEDD2Dao.cs" />
+    <Compile Include="Interface\COMMON\ICommonEEM2Dao.cs" />
+    <Compile Include="Interface\COMMON\ICommonERA2Dao.cs" />
+    <Compile Include="Interface\COMMON\ICommonNTT2Dao.cs" />
+    <Compile Include="Interface\COMMON\ICommonSSO2Dao.cs" />
+    <Compile Include="Interface\DIM\IDIMDao.cs" />
+    <Compile Include="Interface\EDD2\EDD2020202\IEDD2020202Dao.cs" />
+    <Compile Include="Interface\EDD2\EDD2020303\IEDD2020303Dao.cs" />
+    <Compile Include="Interface\EDD2\EDD2020401\IEDD2020401Dao.cs" />
+    <Compile Include="Interface\EDD2\EDD2020406\IEDD2020406Dao.cs" />
+    <Compile Include="Interface\EDD2\EDD2020502\IEDD2020502Dao.cs" />
+    <Compile Include="Interface\EDD2\EDD2020101\IEDD2020101Dao.cs" />
+    <Compile Include="Interface\EDD2\EDD2020201\IEDD2020201Dao.cs" />
+    <Compile Include="Interface\EDD2\EDD2020301\IEDD2020301Dao.cs" />
+    <Compile Include="Interface\EDD2\EDD2020302\IEDD2020302Dao.cs" />
+    <Compile Include="Interface\EDD2\EDD2020402\IEDD2020402Dao.cs" />
+    <Compile Include="Interface\EDD2\EDD2020403\IEDD2020403Dao.cs" />
+    <Compile Include="Interface\EDD2\EDD2020405\IEDD2020405Dao.cs" />
+    <Compile Include="Interface\EDD2\EDD2020602\IEDD2020602Dao.cs" />
+    <Compile Include="Interface\EDD2\EDD2020503\IEDD2020503Dao.cs" />
+    <Compile Include="Interface\EDD2\EDD2020604\IEDD2020604Dao.cs" />
+    <Compile Include="Dao\Dto\EDD2\EDD2020604\EDD2020604SearchModelDto.cs" />
+    <Compile Include="Interface\EDD2\EDD2020605\IEDD2020605Dao.cs" />
+    <Compile Include="Interface\EDD2\IEDD2Dao.cs" />
+    <Compile Include="Interface\EEM2\EEM2010303\IEEM2010303Dao.cs" />
+    <Compile Include="Interface\EEM2\EEM2990104\IEEM2990104Dao.cs" />
+    <Compile Include="Interface\EEM2\EEM2990105\IEEM2990105Dao.cs" />
+    <Compile Include="Interface\EEM2\IEEM2Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2020116\iERA2020116Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2020117\iERA2020117Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2030123\IERA2030123Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2030122\IERA2030122Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2020109\IERA2020109Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2020114\IERA2020114Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA20202\IERA20202Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA20203\IERA20203Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2020103\IERA2020103Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2020141\IERA2020141Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA20201\IERA20201Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2030102\ERA2030102Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2030107\ERA2030107Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2030108\IERA2030108Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2030109\IERA2030109Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2030111\IERA2030111Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2030113\IERA2030113Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2030114\IERA2030114Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2030116\IERA2030116Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2030117\IERA2030117Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2030118\IERA2030118Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2030120\IERA2030120Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2030121\IERA2030121Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2030124\IERA2030124Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2030127\IERA2030127Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2030130\IERA2030130Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA2030133\IERA2030133Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA20301\IERA20301Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA20303\IERA20303Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA20302\IERA20302Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA203\IERA203Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA20401\IERA20401Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA20402\IERA20402Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA20403\IERA20403Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA20404\IERA20404Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA20501\IERA20501Dao.cs" />
+    <Compile Include="Interface\ERA2\ERA20502\IERA20502Dao.cs" />
+    <Compile Include="Interface\ERA2\IERA2.cs" />
+    <Compile Include="Interface\ERA2\IERA2020123Dao.cs" />
+    <Compile Include="Interface\ERA2\IERA2020150Dao.cs" />
+    <Compile Include="Interface\ERA2\IERA20405Dao.cs" />
+    <Compile Include="Interface\ERA2\OPEDDATA\IOPEDDATADao.cs" />
+    <Compile Include="Interface\FIS2\IFIS2990104Dao.cs" />
+    <Compile Include="Interface\FIS2\IFIS2Dao.cs" />
+    <Compile Include="Interface\HEALTH_DB\IHealthDao.cs" />
+    <Compile Include="Interface\EDD2\EDD2020504\IEDD2020504Dao.cs" />
+    <Compile Include="Interface\NDS2\IEocProjectDao.cs" />
+    <Compile Include="Interface\SSO2\ISSO2Dao.cs" />
+    <Compile Include="Job.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JobParameter.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JobQueue.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="List.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOG_CONFIG.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NDS2_AREA_LV.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NDS2_BASIS.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NDS2_CASUALTIES_LV.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NDS2_DESCRIPTION.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NTT2_BULLETIN_10.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NTT2_BULLETIN_11.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NTT2_COMMLIST_10.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NTT2_COMMLIST_11.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NTT2_PARAMETR_00.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NTT2_PARAMETR_11.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OPD_DOC_DESC.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OPD_METADATA.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORG_ID_MAPPING.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Interface\IRepository.cs" />
+    <Compile Include="Interface\IUnitOfWork.cs" />
+    <Compile Include="Interface\IUnitOfWorkRepository.cs" />
+    <Compile Include="REDIS_MENU_TREE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\GenericRepository.cs" />
+    <Compile Include="Repository\UnitOfWork.cs" />
+    <Compile Include="Repository\UnitOfWorkRepository.cs" />
+    <Compile Include="Result\IResult.cs" />
+    <Compile Include="Result\Result.cs" />
+    <Compile Include="Schema.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Server.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Set.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSO2_ACCESS_LOG.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSO2_API.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSO2_API_LOG.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSO2_API_SOURCE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSO2_AP_MENU.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSO2_CONFIG.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSO2_DEFAULT_AUTH.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSO2_DEFAULT_ROLE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSO2_FUNCTION.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSO2_GR.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSO2_GROUP.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSO2_MESSAGE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSO2_OPERATING.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSO2_RF.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSO2_ROLE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSO2_USER_AUTH.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSO2_USER_AUTH_APPLY.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSO2_USER_INFO.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSO2_USER_TOKEN.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="State.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_COM_PARAM.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_MSP_LICENSE.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_MSP_LOG.cs">
+      <DependentUpon>EMIC2.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="EMIC2.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EMIC23.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="EMIC2.edmx.diagram">
+      <DependentUpon>EMIC2.edmx</DependentUpon>
+    </None>
+    <None Include="libman.json" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EMIC2.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EMIC2.edmx</DependentUpon>
+      <LastGenOutput>EMIC2.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EMIC2.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EMIC2.edmx</DependentUpon>
+      <LastGenOutput>EMIC22.cs</LastGenOutput>
+    </Content>
+    <Content Include="Util.WebClass.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

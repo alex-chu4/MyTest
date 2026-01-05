@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <!--*-->
+    <id>Utility</id>
+    <!--*-->
+    <version>1.0.3.22</version>
+    <title>Utility</title>
+    <!--*-->
+    <authors>NEC</authors>
+    <owners>NEC</owners>
+    <!--
+    <licenseUrl></licenseUrl>
+    <projectUrl></projectUrl>
+    <iconUrl></iconUrl>
+-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <!--*-->
+    <description>NEC.Utility
+ 
+
+
+- 2019/11/23_09:00_1.0.3.22 " rename convert to converto</description>
+    <!--*-->
+    <releaseNotes>NEC.Utility Version 1.0.3.22</releaseNotes>
+    <copyright>Copyright ©  2019</copyright>
+    <tags>
+    </tags>
+    <dependencies>
+      <!--
+      <dependency id="SampleDependency" version="1.0" />
+-->
+    </dependencies>
+  </metadata>
+</package>

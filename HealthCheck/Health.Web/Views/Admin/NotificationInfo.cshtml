@@ -1,0 +1,198 @@
+﻿@{
+    ViewBag.Title = "NotificationInfo";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            queryOnClick();
+        });
+
+        function queryOnClick() {
+            $("#resultTable tbody tr").remove();
+
+            var filter = {
+                ACTIVE: $("#qACTIVE").val()
+            }
+            filter.ACTIVE = filter.ACTIVE == '1' ? true : (filter.ACTIVE == '0'?false:filter.ACTIVE);
+            //alert(filter.ACTIVE);
+
+            $("#infos .modal-body").html("<span style='font-size:24px'><i class='fa fa-spinner fa-spin'></i>查詢中…</span>");
+            $("#infos").modal("show");
+
+            $.ajaxPost("@Url.Content("~/NotificationInfo/Search")", filter, function (data) {
+                $("#infos").modal("hide");
+                if ((data != null) && (data.length > 0)) {
+                    $.each(data, function (index, item) {
+                        var html = "";
+
+                        html += "<tr>";
+                        html += "  <td>";
+                        html += "    <input type='hidden' id='" + item.OID + "' value='" + JSON.stringify(item) + "' />";
+                        html += "    <button type='button' onclick='editOnClick(\"" + item.OID + "\");'>編輯</button>&nbsp;&nbsp;";
+                        html += "    <button type='button' onclick='delOnClick(\"" + item.OID + "\");'>刪除</button>";
+                        html += "  </td>";
+                        html += "  <td class='text-center'>" + item.TYPE + "</td>";
+                        html += "  <td class='text-left'>" + (item.EMAIL != null ? item.EMAIL : "") + "</td>";
+                        html += "  <td class='text-left'>" + (item.FAX != null ? item.FAX : "") + "</td>";
+                        html += "  <td class='text-left'>" + (item.SMS != null ? item.SMS : "") + "</td>";
+                        html += "  <td class='text-left'>" + (item.MEMO != null ? item.MEMO : "") + "</td>";
+                        html += "  <td class='text-center'>" + (item.ACTIVE != null && item.ACTIVE ? "是" : "否") + "</td>";
+                        html += "  <td class='text-center'>" + moment(item.CREATE_TIME).format("YYYY-MM-DD HH:mm:ss") + "</td>";
+                        html += "  <td class='text-center'>" + (item.UPDATE_TIME != null ? moment(item.UPDATE_TIME).format("YYYY-MM-DD HH:mm:ss") : "") + "</td>";
+                        html += "</tr>";
+
+                        $("#resultTable tbody").append(html);
+                    });
+                }
+            });
+        }
+
+        function newOnClick() {
+            var obj = {
+                OID: "",
+                TYPE: "",
+                EMAIL: "",
+                FAX: "",
+                SMS: "",
+                MEMO: "",
+                ACTIVE: true
+            };
+            setFormFields(obj);
+
+            $("#actionType").text("新增");
+            $("#notificatioinInfo").modal("show");
+        }
+
+        function editOnClick(oid) {
+            var obj = JSON.parse($("#" + oid).val());
+            setFormFields(obj);
+
+            $("#actionType").text("編輯");
+            $("#notificatioinInfo").modal("show");
+        }
+
+        function confirmOnClick() {
+            var actionType = $("#actionType").text();
+            var obj = {
+                OID: $("#fOID").val(),
+                TYPE: $("#fTYPE").val(),
+                EMAIL: $("#fEMAIL").val(),
+                FAX: $("#fFAX").val(),
+                SMS: $("#fSMS").val(),
+                MEMO: $("#fMEMO").val(),
+                ACTIVE: $("#fACTIVE").prop("checked")
+            };
+
+            if ((obj.EMAIL === "") && (obj.SMS === "")) {
+                alert("EMAIL、SMS不能都為空值！");
+            }
+            else {
+                var url = (actionType == "新增") ? "@Url.Content("~/NotificationInfo/Create")" : "@Url.Content("~/NotificationInfo/Update")";
+                $.ajaxPost(url, obj, function (data) {
+                    $("#notificatioinInfo").modal("hide");
+                    queryOnClick();
+                });
+            }
+        }
+
+        function delOnClick(oid) {
+            var obj = JSON.parse($("#" + oid).val());
+
+            if (confirm("確認刪除" + obj.EMAIL + "：" + obj.SMS + "？")) {
+                $.ajaxPost("@Url.Content("~/NotificationInfo/Delete")", obj, function (data) {
+                    queryOnClick();
+                });
+            }
+        }
+
+        function setFormFields(obj) {
+            $("#fOID").val(obj.OID);
+            $("#fTYPE").val(obj.TYPE);
+            $("#fEMAIL").val(obj.EMAIL);
+            $("#fFAX").val(obj.FAX);
+            $("#fSMS").val(obj.SMS);
+            $("#fMEMO").val(obj.MEMO);
+            $("#fACTIVE").prop("checked", obj.ACTIVE);
+        }
+    </script>
+}
+<br />
+<div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-6 col-xs-12">
+        <label>ACTIVE：</label>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+        <select id="qACTIVE" class="form-control">
+            <option value="">全部</option>
+            <option value="1">啟用</option>
+            <option value="0">停用</option>
+        </select>
+    </div>
+    <div class="col-lg-offset-7 col-md-offset-7 col-lg-2 col-md-2 col-sm-12 col-xs-12">
+        <button type="button" class="btn btn-primary" onclick="queryOnClick();">查詢</button>
+        <button type="button" class="btn btn-default" onclick="newOnClick();">新增</button>
+    </div>
+</div>
+<br />
+<div class="table-responsive">
+    <table id="resultTable" class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th class="text-center">TYPE</th>
+                <th class="text-center">EMAIL</th>
+                <th class="text-center">FAX</th>
+                <th class="text-center">SMS</th>
+                <th class="text-center">MEMO</th>
+                <th class="text-center">ACTIVE</th>
+                <th class="text-center">建立時間</th>
+                <th class="text-center">異動時間</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+<div class="modal fade" id="notificatioinInfo" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><span class="glyphicon glyphicon-lock"></span><span id="actionType"></span></h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="fOID" />
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">TYPE：</div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <input type="text" id="fTYPE" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">EMAIL：</div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <input type="text" id="fEMAIL" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">FAX：</div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <input type="text" id="fFAX" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">SMS：</div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <input type="text" id="fSMS" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">MEMO：</div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <input type="text" id="fMEMO" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">ACTIVE：</div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <input type="checkbox" id="fACTIVE" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary pull-left" onclick="confirmOnClick();"><span class="glyphicon glyphicon-remove"></span> 確認</button>
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> 取消</button>
+            </div>
+        </div>
+    </div>
+</div>

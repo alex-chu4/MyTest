@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <!-- Title and other stuffs -->
+    <title>EMIC APM監控儀表板</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <!-- Stylesheets -->
+    @*<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />*@
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <!-- Font awesome icon -->
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    @*<link href="~/Content/fullcalendar.min.css" rel="stylesheet" />*@
+
+    <!-- Main stylesheet -->
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <!-- Widgets stylesheet -->
+    <link href="~/Content/widgets.css" rel="stylesheet" />
+
+    <link href="~/Content/morris.min.css" rel="stylesheet" />
+    @RenderSection("styles", false)
+
+    <!--[if lt IE 9]>
+    <script src="~/Scripts/html5shiv.js"></script>
+    <![endif]-->
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./img/icon.ico" />
+    <link rel="bookmark" href="./img/icon.ico" />
+
+    <!-- JS -->
+    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Scripts/fullcalendar/fullcalendar.min.js"></script>
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/raphael.js"></script>
+    <script src="~/Scripts/morris.min.js"></script>
+    <script src="~/Scripts/ajaxExtensions.js"></script>
+    @RenderSection("scripts", false)
+</head>
+
+<body>
+    <!-- Header starts -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <!-- Logo section -->
+                <a href="@Url.Action("EMIC2_Current","Rpt")">
+                    <div class="col-md-2 col-xs-2">
+                        <!-- Logo. -->
+                        <div class="logo">
+
+                        </div>
+                    </div>
+                </a>
+                <!-- Logo ends -->
+                <!-- Data section -->
+                <div class="col-md-5 col-xs-10 pull-right">
+                    <div class="header-data pull-right">
+
+                        <!-- Traffic data -->
+                        <div class="hdata">
+                            <div class="mcol-left">
+                                <!-- Icon with red background -->
+                                <i class="fa fa-bell bred"></i>
+                            </div>
+                            <div class="mcol-right">
+                                <!-- Number of visitors -->
+                                <p><span id="alertsNumber"></span><em>狀態警示</em></p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <!-- Event data -->
+                        <div class="hdata">
+                            <div class="mcol-left">
+                                <!-- Icon with red background -->
+                                <i class="fa fa-bolt bred"></i>
+                            </div>
+                            <div class="mcol-right">
+                                <!-- Number of visitors -->
+                                <p><span id="eventsNumber"></span><em>事件警示</em></p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <!-- Members data -->
+                        <div class="hdata">
+                            <div class="mcol-left">
+                                <!-- Icon with blue background -->
+                                <i class="fa fa-user bblue"></i>
+                            </div>
+                            <div class="mcol-right">
+                                <!-- Number of visitors -->
+                                <p><span id="usersNumber"></span><em>上線人數</em></p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Header ends -->
+    <!-- Main content starts -->
+
+    <div class="content">
+        <!-- Main bar -->
+        <div class="mainbar">
+
+            <!-- Page heading -->
+            <div class="page-head">
+                <h2 class="pull-left">
+                    <i class="fa fa-home"></i> @ViewBag.Title
+                </h2>
+                <div class="clearfix"></div>
+
+            </div>
+            <!-- Page heading ends -->
+            <!-- Matter -->
+            <div class="matter">
+                <div class="container">
+                    @RenderBody()
+                </div>
+            </div>
+            <!-- Matter ends -->
+
+        </div>
+
+        <!-- Mainbar ends -->
+        <div class="clearfix"></div>
+
+    </div>
+    <!-- Content ends -->
+    <!-- Footer starts -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Copyright info -->
+                    <p class="copy">Copyright &copy; 2019 | <a href="#">EMIC</a> </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer ends -->
+    <!-- Modal -->
+    <div class="modal fade" id="alerts" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span class="glyphicon glyphicon-lock"></span> 警示</h4>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> 關閉</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

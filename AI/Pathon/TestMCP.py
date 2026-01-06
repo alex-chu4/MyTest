@@ -1,137 +1,78 @@
-import gradio as gr
-from openai import OpenAI
 import os
+from openai import OpenAI
+from dotenv import load_dotenv
 
-# 設置 OpenAI API 密鑰（請替換為您自己的 API 密鑰）
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY", "sk-1234"))
 
-# 儲存聊天記錄
-conversation_history = []
+load_dotenv()
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-# 聊天功能
-def chat_with_gpt(user_input):
-    global conversation_history
+# 1. 定義 AI 代理人可以使用的工具 (Function)
+def get_weather(location):
+    """查詢指定地點的天氣"""
+    return f"{location} 的天氣是晴天，氣溫 25 度。"
+
+# 2. 定義工具的 JSON 描述，讓 ChatGPT 知道如何調用
+tools = [
+    {
+        "type": "function",
+        "function": {
+            "name": "get_weather",
+            "description": "獲取給定位置的天氣資訊",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "location": {"type": "string", "description": "城市名稱，例如：台北"}
+                },
+                "required": ["location"],
+            },
+        },
+    }
+]
+
+def run_ai_agent(user_prompt):
+    print(f"--- AI代理人 接收任務: {user_prompt} ---")
     
-    if user_input:
-        # 將用戶輸入添加到對話歷史
-        conversation_history.append({"role": "user", "content": user_input})
+    # 3. 初始調用 ChatGPT API應用
+    messages = [{"role": "user", "content": user_prompt}]
+    response = client.chat.completions.create(
+        model="gpt-4-turbo-preview",
+        messages=messages,
+        tools=tools,
+        tool_choice="auto"
+    )
+    
+    response_message = response.choices[0].message
+    tool_calls = response_message.tool_calls
+
+    # 4. 判斷 AI Agent 是否決定調用工具
+    if tool_calls:
+        print("--- AI Agent 決定調用外部工具 ---")
+        for tool_call in tool_calls:
+            # 這裡實作具體的工具調用邏輯
+            if tool_call.function.name == "get_weather":
+                # 解析參數並執行函式
+                import json
+                args = json.loads(tool_call.function.arguments)
+                result = get_weather(args['location'])
+                print(f"工具回傳結果: {result}")
+                
+                # 將結果回傳給 AI 進行最後總結
+                messages.append(response_message)
+                messages.append({
+                    "role": "tool",
+                    "tool_call_id": tool_call.id,
+                    "content": result
+                })
         
-        try:
-            # 調用 OpenAI API
-            response = client.chat.completions.create(
-                #model="gpt-3.5-turbo",
-                #model="gpt-5-nano",
-                model="gpt-3.5-turbo",
-                messages=conversation_history,
-                max_completion_tokens=500,
-                #temperature=0.7
-            )
-            
-            # 獲取 AI 回應
-            ai_response = response.choices[0].message.content
-            
-            # 將 AI 回應添加到對話歷史
-            conversation_history.append({"role": "assistant", "content": ai_response})
-            
-            # 格式化顯示對話
-            formatted_conversation = ""
-            for msg in conversation_history:
-                role = "You" if msg["role"] == "user" else "ChatGPT"
-                formatted_conversation += f"**{role}:** {msg['content']}\n\n"
-            
-            return formatted_conversation
-        
-        except Exception as e:
-            return f"Error: {str(e)}"
+        final_response = client.chat.completions.create(
+            model="gpt-4-turbo-preview",
+            messages=messages
+        )
+        return final_response.choices[0].message.content
     
-    return "Please enter a message."
+    return response_message.content
 
-# 清除對話歷史
-def clear_conversation():
-    global conversation_history
-    conversation_history = []
-    #return "Conversation cleared!"
-    return ""
-
-custom_css = """
-#submit_button {
-    background-color: red !important;
-    color: white !important;
-}
-#clear_button {
-    background-color: green !important;
-    color: white !important;
-}
-"""
-
-# Gradio 界面
-with gr.Blocks(title="ChatGPT 聊天網頁",theme=gr.themes.Soft(), css=custom_css) as demo:
-    gr.Markdown("# ChatGPT 聊天網頁")
-    
-    # 聊天顯示區域
-    chatbot_output = gr.Textbox(
-        label="對話歷史",
-        placeholder="對話將顯示在這裡...",
-        lines=10,
-        max_lines=15
-    )
-    
-    # 用戶輸入框
-    # user_input = gr.Textbox(
-    #     label="輸入您的訊息",
-    #     placeholder="輸入您的問題或訊息..."
-    # )
-    user_input = gr.Textbox(
-                label="輸入問題",
-                placeholder="例如：檔案內容中提到什麼？",
-                scale=3
-    )
-    gr.Examples(
-                examples=[
-                    "告訴我一個笑話",
-                    "解釋量子力學 ",
-                    "幫我寫詩 "                   
-                ],
-                inputs=user_input,
-    )
-    
-    # 按鈕區域
-    with gr.Row():
-        submit_button = gr.Button("發送", elem_id="submit_button")         
-        clear_button = gr.Button("清除對話", elem_id="clear_button")
-    
-    # 提示範例
-    # with gr.Accordion("提示範例", open=True):
-    #     gr.Button("告訴我一個笑話").click(
-    #         fn=lambda: "Tell me a joke",
-    #         outputs=user_input
-    #     )
-    #     gr.Button("解釋量子力學").click(
-    #         fn=lambda: "Explain quantum mechanics in simple terms",
-    #         outputs=user_input
-    #     )
-    #     gr.Button("幫我寫詩").click(
-    #         fn=lambda: "Write a short poem about the stars",
-    #         outputs=user_input
-    #     )
-    
-    # 綁定按鈕事件
-    submit_button.click(
-        fn=chat_with_gpt,
-        inputs=user_input,
-        outputs=chatbot_output
-    )
-    
-    clear_button.click(
-        fn=clear_conversation,
-        outputs=chatbot_output
-    )
-
-# 啟動 Gradio 界面
-#demo.launch()
-demo.launch(
-        debug=False,
-        server_name="127.0.0.1",
-        server_port=8101,
-        share=True
-    )
+# 執行 Python AI Agent實作 範例
+if __name__ == "__main__":
+    result = run_ai_agent("請問台北現在天氣如何？")
+    print(f"AI代理人 最終回覆: {result}")

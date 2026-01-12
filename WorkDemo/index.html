@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的作品Demo</title>
+    <link rel="icon" href="OK.ico" type="image/x-icon">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <!-- <link rel="stylesheet" type="text/css"
+        href="https://rawgit.com/dimsemenov/Magnific-Popup/master/dist/magnific-popup.css"> -->
+    <link rel="stylesheet" type="text/css" href="magnific-popup.css" />
+    <script src="jquery-3.7.1.js"></script>
+    <script src="bootstrap.bundle.min.js"></script>
+    <!-- <script type="text/javascript"
+        src="https://rawgit.com/dimsemenov/Magnific-Popup/master/dist/jquery.magnific-popup.js"></script> -->
+    <script type="text/javascript" src="jquery.magnific-popup.js"></script>
+    <script type="text/javascript" src="qrcode.min.js"></script>
+    <style>
+        :root {
+            --foreColor: red;
+            --font-size-fluid: clamp(1rem, 2vw + 0.5rem, 2rem);
+            --font-size: 16px;
+        }
+
+        @media (max-width: 480px) {
+            :root {
+                --foreColor: rgb(153, 11, 11);
+                --font-size: 12px;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --foreColor: green;
+            }
+        }
+
+        h3,
+        h5 {
+            color: var(--foreColor);
+            font-size: var(--font-size-fluid);
+        }
+
+        .myText {
+            color: var(--foreColor);
+            font-size: var(--font-size);
+        }
+
+        table {
+            border-spacing: 0;
+            width: 100%;
+        }
+
+        td {
+            border-bottom: 1px solid #eee;
+            background: #ddd;
+            color: #000;
+            padding: 10px 25px;
+        }
+
+        th {
+            background: #87CEFA;
+            padding: 10px 25px;
+        }
+
+        td+td {
+            border-left: 1px solid #eee;
+        }
+
+        .col-md-4 {
+            padding: 0px;
+        }
+
+        /* boom ------------------------B*/
+        .boom {
+            width: 10px;
+            /* Initial diameter (2 * radius) */
+            height: 10px;
+            background-color: orangered;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: explode 0.8s forwards;
+        }
+
+        @keyframes explode {
+            from {
+                width: 10px;
+                /* Initial diameter (2 * radius) */
+                height: 10px;
+            }
+
+            to {
+                width: 95%;
+                /* Final diameter (2 * radius) */
+                height: 95%;
+                opacity: 0;
+            }
+        }
+
+        /* boom ------------------------E*/
+
+        /* description -----------------B*/
+        .cidr input[type="checkbox"] {
+            display: none;
+        }
+
+        .cidr label {
+            opacity: 0.5;
+            cursor: pointer;
+            border: 1px solid #444;
+            background-color: #ccc;
+            display: inline-block;
+            width: 18pt;
+            height: 18pt;
+            font-size: 18pt;
+            line-height: 18.2pt;
+            text-align: center;
+            vertical-align: middle;
+            margin-right: 2px;
+        }
+
+        .cidr label:hover {
+            opacity: 1;
+        }
+
+        .cidr>span {
+            background-color: #eee;
+            padding: 2px 6px;
+        }
+
+        .cidr .cidr-e {
+            display: none;
+        }
+
+        .cidr .toggle:checked+.cidr-c {
+            display: none;
+        }
+
+        .cidr .toggle:checked+.cidr-c+.cidr-e {
+            display: inline;
+        }
+
+        /* description -----------------E*/
+    </style>
+</head>
+
+<body>
+    <center>
+        <h3>
+            <font>--- 我的作品Demo ---</font>
+        </h3>
+        <h5>
+            <font> (RWD & 點選圖片可放大)</font>
+        </h5>
+    </center>
+    <div class="g-recaptcha" data-sitekey="6Le2TDoqAAAAAINX7y9TyXiNmtkMo1ftha4WvlLv" data-callback="recaptchaSuccess">
+    </div>
+    <button onclick="grecaptcha.reset();">Reset</button>
+    <section id="main" class="">
+        <div id="container1" class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <image class="FlowerLink AF" src="MyWork-10.png" height="300" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ10</span>
+                </div>
+                <div class="col-md-4">
+                    <image class="FlowerLink AF" src="MyWork-30.png" height="300" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ30</span>
+                </div>
+                <div class="col-md-4">
+                    <image class="FlowerLink AF" src="MyWork-20.jpg" height="300" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ20</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <image class="FlowerLink AF" src="MyWork-12.png" height="300" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ12</span>
+                </div>
+                <div class="col-md-4">
+                    <image class="FlowerLink DW" src="MyWork-AI-7.jpg" height="300" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ15</span>
+                </div>
+                <div class="col-md-4">
+                    <image class="FlowerLink DW" src="MyWork-AI-10.jpg" height="300" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ17</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <image class="FlowerLink DW" src="MyWork-80.png" height="300" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ80</span>
+                </div>
+                <div class="col-md-4">
+                    <image class="FlowerLink DW" src="MyWork-40.png" height="300" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ40</span>
+                </div>
+                <div class="col-md-4">
+                    <image class="FlowerLink DW" src="MyWork-50.png" height="250" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ50</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <image class="FlowerLink DW" src="MyWork-52.png" height="300" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ52</span>
+                </div>
+                <div class="col-md-4">
+                    <image class="FlowerLink DW" src="MyWork-60.png" height="300" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ60</span>
+                </div>
+                <div class="col-md-4">
+                    <image class="FlowerLink DW" src="MyWork-75.png" height="300" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ75</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 col-sm-6" style="display: flex;align-items: center; justify-content: center;">
+                    <button id="download" class="btn btn-danger"
+                        style="width:90%;color:red;font-weight:bold;color:white;">架構流程下載</button>
+                </div>
+                <div class="col-6 col-sm-6" style="display: flex;align-items: center; justify-content: center;">
+                    <button id="download2" class="btn btn-warning"
+                        style="width:90%;color:red;font-weight:bold;color:white;">UI截圖下載</button>
+                </div>
+            </div>
+        </div>
+        <div id="container2" class="container" style="display:none;">
+            <div id="TempBlock" class="row">
+                <div class="col-md-12" style="display: flex;align-items: center; justify-content: center;">
+                </div>
+            </div>
+
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <b class="modal-title" id="exampleModalLabel" style="color:red;">QR Code</b>
+                        <br />
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="qrc"></div>
+                    </div>
+                    <br />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" id="printQRCode" class="btn btn-primary">Print</button>
+                    </div>
+                </div>
+            </div>
+            <iframe id="iDummy" style="display:none;"></iframe>
+    </section>
+
+    <script>
+        function GetDateTimeString(dateTime) {
+            let year = dateTime.getFullYear();
+            let month = (`0${dateTime.getMonth() + 1}`).slice(-2);
+            let day = (`0${dateTime.getDate()}`).slice(-2);
+            let hour = (`0${dateTime.getHours()}`).slice(-2);
+            let minute = (`0${dateTime.getMinutes()}`).slice(-2);
+            let second = (`0${dateTime.getSeconds()}`).slice(-2);
+            return `${year}.${month}.${day} ${hour}:${minute}:${second}`;
+        }
+        function isMobileDevice() {
+            //alert(navigator.userAgent);
+            return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        function recaptchaSuccess(response) {
+            // 參數 'response' 包含 reCAPTCHA 回傳的 token (g-recaptcha-response)
+            console.log("reCAPTCHA 驗證成功！Token:", response);
+            //alert(response);
+
+            // 爆炸特效 ------------------- B
+            let boomDiv = document.createElement('div');
+            boomDiv.classList.add('boom');
+            boomDiv.innerHTML = 'test';
+            document.getElementById('main').appendChild(boomDiv);
+            setTimeout(() => {
+                boomDiv.remove();
+            }, 500);
+            // 爆炸特效 ------------------- E
+
+            // Notification --------------- B
+            if ("Notification" in window) {
+                Notification.requestPermission().then(info => {
+                    //alert('恭喜您通過驗證 !!');
+                    const sysNotiUpdate = new Notification(
+                        `                --- 重要通知 ---`, {
+                        body: `
+                   ${GetDateTimeString(new Date())}    
+
+                    驗 證 通 過 !!`,
+                        icon: "OK.ico",
+                    });
+                    sysNotiUpdate.addEventListener("error", e => {
+                        alert(`Notification Error ->  ${JSON.stringify(e)}`);
+                    });
+                });
+            }
+            else {
+                alert('恭喜您通過驗證 !!');
+            }
+            // Notification --------------- E
+        }
+
+        $(document).ready(function () {
+            $(".FlowerLink").each(function () {
+                $(this).wrap("<a class=\"FlowerLinkWrapper\" href=\"" + $(this).attr('src') + "\"></a>");
+            });
+            $('.FlowerLinkWrapper').magnificPopup(
+                {
+                    type: 'image',
+                    closeOnContentClick: true,
+                    image:
+                    {
+                        verticalFit: true
+                    },
+                    zoom:
+                    {
+                        enabled: true,
+                        duration: 800 // don't foget to change the duration also in CSS
+                    }
+                });
+
+            try {
+
+
+                grecaptcha.reset();
+            }
+            catch (err) {
+            }
+
+            setTimeout(function () {
+                location.reload();
+            }, 60000);
+
+            var iCnt = 0;
+            var iFresh = function () {
+                //document.getElementById('iDummy').src = location.href;
+                document.getElementById('iDummy').src = 'TestCT.html';
+                iCnt++;
+                if (iCnt <= 15) {
+                    setTimeout(function () {
+                        iFresh();
+                    }, 3000);
+                }
+            };
+            iFresh();
+        });
+        $(this).wrap("<a class=\"FlowerLinkWrapper\" href=\"" + $(this).attr('src') + "\"></a>");
+        $('.FlowerLinkWrapper').magnificPopup({})
+    </script>
+    <!-- <script src="https://www.google.com/recaptcha/api.js"></script> -->
+    <script>
+        try {
+            var onloadCallback = function () {
+                //alert("grecaptcha is ready!");
+            };
+
+            let _JS = document.createElement('script');
+            _JS.setAttribute('src', 'https://www.google.com/recaptcha/api.js' + '?v=' + (new Date()).getTime() + '&onload=onloadCallback');
+            document.body.appendChild(_JS);
+        }
+        catch (err) {
+        }
+    </script>
+
+    <script>
+        let okLog = [];
+        let okCnt = 0;
+        let errLog = [];
+        let errorCnt = 0;
+        function GetDateTimeString(dateTime) {
+            let year = dateTime.getFullYear();
+            let month = (`0${dateTime.getMonth() + 1}`).slice(-2);
+            let day = (`0${dateTime.getDate()}`).slice(-2);
+            let hour = (`0${dateTime.getHours()}`).slice(-2);
+            let minute = (`0${dateTime.getMinutes()}`).slice(-2);
+            let second = (`0${dateTime.getSeconds()}`).slice(-2);
+            return `${year}.${month}.${day} ${hour}:${minute}:${second}`;
+        }
+
+        async function Download(Urls, isBadguy) {
+            let Log = '';
+            okLog = [];
+            okCnt = 0;
+            errLog.length = 0;
+            errorCnt = 0;
+
+            await new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve();
+                }, 20);
+            });
+            document.getElementById('TempBlock').innerHTML = '';
+            document.getElementById('container1').style.display = 'none';
+            document.getElementById('container2').style.display = 'block';
+
+            const promises = Urls.map((item, Index) => {
+                //return fetch("https://mytest-2x6.pages.dev/img3/" + item)
+                return fetch(item)
+                    .then(response => response.blob())
+                    .then(blob => new Promise((resolve, reject) => {
+                        okCnt++;
+                        okLog.push({
+                            SerNo: okCnt,
+                            Name: item,
+                            Time: GetDateTimeString(new Date()),
+                            Msg: 'OK'
+                        });
+
+                        resolve({
+                            Name: item,
+                            Data: blob
+                        });
+                    }))
+                    .catch(error => {
+                        errorCnt++;
+                        errLog.push({
+                            SerNo: errorCnt,
+                            Name: item,
+                            Time: GetDateTimeString(new Date()),
+                            Msg: error.message
+                        });
+                    });
+                ;
+
+            });
+
+            Promise.all(promises)
+                .then(async items => {
+                    let tmpTasks = [];
+                    items.forEach(async (item, index) => {
+                        const imageObjectURL = URL.createObjectURL(item.Data);
+
+                        // 下載圖片
+                        const downloadLink = document.createElement('a');
+                        downloadLink.href = imageObjectURL;
+                        downloadLink.download = item.Name;
+                        downloadLink.click();
+
+                        // 顯示圖片
+                        const img = document.createElement('img');
+                        img.src = imageObjectURL;
+                        img.alt = item.Name;
+                        img.classList.add('download');
+                        if (isBadguy) {
+                            img.width = 400;
+                            img.height = 300;
+                            img.classList.add('col-md-3');
+                        } else {
+                            img.width = 200;
+                            img.height = 200;
+                            img.classList.add('col-md-2');
+                        }
+                        // 圖片加浮水印 - B
+                        let tmpTask = new Promise((resolve, reject) => {
+                            const canvas = document.createElement('canvas');
+                            const ctx = canvas.getContext('2d');
+                            const image = new Image();
+                            image.src = img.src;
+                            image.crossOrigin = 'Anonymous';
+                            image.onload = async () => {
+                                await new Promise((resolve, reject) => {
+                                    setTimeout(() => {
+                                        resolve();
+                                    }, 50);
+                                });
+
+                                canvas.width = image.width;
+                                canvas.height = image.height;
+                                // 圖片加入canvas
+                                ctx.drawImage(image, 0, 0, image.width, image.height);
+                                // 紅色文字加入canvas 並位於頂部中央
+                                ctx.fillStyle = 'red';
+                                ctx.font = 'bold  30px Arial';
+                                ctx.textAlign = 'center';
+                                ctx.textBaseline = 'top';
+                                ctx.fillText("Alex製作\r\n", canvas.width / 2, 10)
+                                img.src = canvas.toDataURL();
+                                console.log(img.src);
+                                resolve();
+                            };
+                        });
+                        tmpTasks.push(tmpTask);
+                        // 圖片加浮水印 - E
+                        const imageContainer = document.getElementById('TempBlock');
+                        imageContainer.appendChild(img);
+                    });
+
+                    await Promise.all(tmpTasks);
+
+                    let okLog2 = [];
+                    //alert(JSON.stringify(okLog));
+                    okLog.forEach((item, index) => {
+                        let tempLog = [];
+                        tempLog.push(item.SerNo);
+                        tempLog.push(item.Time);
+                        tempLog.push(`[${item.Name}]`);
+                        tempLog.push(item.Msg);
+                        okLog2.push(tempLog.join(' '));
+                    });
+                    Log += `成功${okLog2.length}筆:\r\n${okLog2.join('\r\n')}\r\n\r\n`;
+
+                    let errLog2 = [];
+                    //alert(JSON.stringify(errLog));
+                    errLog.forEach((item, index) => {
+                        let tempLog = [];
+                        tempLog.push(item.SerNo);
+                        tempLog.push(item.Time);
+                        tempLog.push(`[${item.Name}]`);
+                        tempLog.push(item.Msg);
+                        errLog2.push(tempLog.join(' '));
+                    });
+                    Log += `失敗${errLog2.length}筆:\r\n${errLog2.join('\r\n')}`;
+
+                    const logUrl = URL.createObjectURL(new Blob([Log], { type: 'text/plain' }));
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = logUrl;
+                    downloadLink.download = 'log.txt';
+                    downloadLink.click();
+
+                    const logBlock = document.createElement('div');
+                    logBlock.classList.add('col-md-12');
+                    logBlock.style.fontWeight = 'bold';
+                    logBlock.style.border = 'solid';
+                    logBlock.innerText = Log;
+                    document.getElementById('TempBlock').appendChild(logBlock);
+
+                    const btnOK = document.createElement('button');
+                    btnOK.textContent = "確定";
+                    btnOK.classList.add('btn', 'btn-danger', 'col-md-12');
+                    btnOK.onclick = () => {
+                        document.getElementById('container2').style.display = 'none';
+                        document.getElementById('TempBlock').innerHTML = '';
+                        document.getElementById('container1').style.display = 'block';
+                    };
+                    document.getElementById('TempBlock').appendChild(btnOK);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
+        ($(function () {
+            var qrcode = new QRCode(document.getElementById("qrc"), {
+                width: 128,
+                height: 128,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            document.getElementById("printQRCode").addEventListener("click", function () {
+                var printWindow = window.open('', '', 'height=600,width=800');
+                printWindow.document.write('<html><head><title>Print</title>');
+                printWindow.document.write('<style>@media print { body { margin-top:100px; display:flex; justify-content:center; align-items:center; flex-direction:column; } }</style>');
+                printWindow.document.write('</head><body >');
+                printWindow.document.write($('#qrc').html());
+                printWindow.document.close();
+                setTimeout(function () {
+                    printWindow.print();
+                    printWindow.close();
+                }, 250);
+            });
+
+            jQuery(".FlowerLink").each(function () {
+                // if ($(this).attr("src") != null && $(this).attr("src").indexOf('bad') >= 0) {
+                //     return;
+                // }
+                const btnQRCode = document.createElement('button');
+                btnQRCode.textContent = "QRCode";
+                btnQRCode.classList.add('btn', 'btn-primary', 'col-md-12');
+                btnQRCode.onclick = (event) => {
+                    var quurl = $(this).attr("src");
+                    $('#exampleModalLabel').html(quurl);
+                    let _tmpArray = location.href.split('/');
+                    qrcode.makeCode(location.href.replace(_tmpArray[_tmpArray.length - 1], '') + quurl);
+                    $('#exampleModal').modal('show');
+                };
+                $(this)[0].parentNode.parentNode.appendChild(btnQRCode);
+            });
+
+            //document.getElementById('download').addEventListener('click', function () { Download(Urls); });
+            document.getElementById('download').onclick = () => {
+
+                const Urls = [];
+                jQuery(".AF").each(function () {
+                    Urls.push($(this).attr("src"));
+                });
+                Download(Urls, true);
+            };
+
+            document.getElementById('download2').onclick = () => {
+                const Urls = [];
+                jQuery(".DW").each(function () {
+                    Urls.push($(this).attr("src"));
+                });
+                Download(Urls, false);
+            };
+
+            // Description -------------------------------------------------- B
+            function getDescription(DWId) {
+                switch (DWId) {
+                    case '10':
+                        //break;
+                        return '1.資訊系統架構圖';
+                    case '30':
+                        return '2. CommonModule架構圖';
+                    case '20':
+                        return '3.源碼檢核流程圖';
+                    case '12':
+                        return '4.EIP系統流程圖';
+                    case '15':
+                        return '5.本地AI+自訂QA (RAG~Python)';
+                    case '17':
+                        return '6.本地AI+自訂QA (MCP~C#)';
+                    case '40':
+                        return '8.APM(應用系統監控)';
+                    case '80':
+                        return '7.OPEN DATA-出口統計';
+                    case '50':
+                        return '9.資源監控-CPU、Memory、HardDisk';
+                    case '52':
+                        return '10.IIS監控';
+                    case '60':
+                        return '11.EventLog分析';
+                    case '75':
+                        return '12.AD帳號與人資系統(HRIS)同步服務~手機版';
+                    default:
+                        return '其它語言髒話';
+                }
+            }
+
+            function injectExpandButton(selector) {
+                document.querySelectorAll(selector).forEach(e => {
+                    try {
+                        const idPrefix = "_" + Math.random().toString(36).substring(2);
+                        let idx = 0;
+                        e.innerHTML = e.innerHTML.replace(
+                            /(Ｘ\d{2})/g,
+                            cidr => {
+                                const id = idPrefix + (idx++);
+                                return `<span class="cidr">
+                            <input type="checkbox" id="${id}" class="toggle">
+                            <span class="cidr-c" ><label for="${id}">+</label>...</span>
+                            <span class="cidr-e myText"><label for="${id}">–</label>${getDescription(cidr.substring(1))}</span>
+                        </span>`;
+                            });
+                    }
+                    catch {
+
+                    }
+                });
+            }
+            injectExpandButton('.desc');
+            // Description -------------------------------------------------- E
+
+            // 爆炸特效 ---------------------------------------------------- B
+            let boomDiv = document.createElement('div');
+            boomDiv.classList.add('boom');
+            boomDiv.innerHTML = 'test';
+            document.getElementById('main').appendChild(boomDiv);
+            setTimeout(() => {
+                boomDiv.remove();
+            }, 500);
+            // 爆炸特效 ---------------------------------------------------- E
+        }))();
+    </script>
+</body>
+
+</html>

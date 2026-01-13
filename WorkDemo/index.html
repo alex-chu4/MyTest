@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的作品Demo</title>
+    <title>我的作品</title>
     <link rel="icon" href="OK.ico" type="image/x-icon">
     <link rel="stylesheet" href="bootstrap.min.css">
     <!-- <link rel="stylesheet" type="text/css"
@@ -151,7 +151,7 @@
 <body>
     <center>
         <h3>
-            <font>--- 我的作品Demo ---</font>
+            <font>--- 我的作品 ---</font>
         </h3>
         <h5>
             <font> (RWD & 點選圖片可放大)</font>
@@ -188,6 +188,20 @@
                 <div class="col-md-4">
                     <image class="FlowerLink DW" src="MyWork-AI-10.jpg" height="300" width="400"></image>
                     <span class='col-md-12 col-sm-12 desc'>Ｘ17</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <image class="FlowerLink AF" src="MyWork-42.jpg" height="300" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ42</span>
+                </div>
+                <div class="col-md-4">
+                    <image class="FlowerLink DW" src="MyWork-AI-11.jpg" height="300" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ85</span>
+                </div>
+                <div class="col-md-4">
+                    <image class="FlowerLink DW" src="MyWork-AI-12.jpg" height="300" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ87</span>
                 </div>
             </div>
             <div class="row">
@@ -246,6 +260,7 @@
                     </div>
                     <div class="modal-body">
                         <div id="qrc"></div>
+                        <input id="qrcUrl" type="hidden" />
                     </div>
                     <br />
                     <div class="modal-footer">
@@ -563,7 +578,8 @@
                 printWindow.document.write('<html><head><title>Print</title>');
                 printWindow.document.write('<style>@media print { body { margin-top:100px; display:flex; justify-content:center; align-items:center; flex-direction:column; } }</style>');
                 printWindow.document.write('</head><body >');
-                printWindow.document.write($('#qrc').html());
+                //printWindow.document.write($('#qrc').html());
+                printWindow.document.write('<image src="' + $('#qrcUrl').val() + '"></image>');
                 printWindow.document.close();
                 setTimeout(function () {
                     printWindow.print();
@@ -576,13 +592,14 @@
                 //     return;
                 // }
                 const btnQRCode = document.createElement('button');
-                btnQRCode.textContent = "QRCode";
+                btnQRCode.textContent = "QRCode 與 Print ";
                 btnQRCode.classList.add('btn', 'btn-primary', 'col-md-12');
                 btnQRCode.onclick = (event) => {
                     var quurl = $(this).attr("src");
                     $('#exampleModalLabel').html(quurl);
                     let _tmpArray = location.href.split('/');
                     qrcode.makeCode(location.href.replace(_tmpArray[_tmpArray.length - 1], '') + quurl);
+                    $('#qrcUrl').val(quurl);
                     $('#exampleModal').modal('show');
                 };
                 $(this)[0].parentNode.parentNode.appendChild(btnQRCode);
@@ -619,21 +636,27 @@
                     case '12':
                         return '4.EIP系統流程圖';
                     case '15':
-                        return '5.本地AI+自訂QA (RAG~Python)';
+                        return '5.本地AI+RAG自訂QA (Ububtu~Python)';
                     case '17':
-                        return '6.本地AI+自訂QA (MCP~C#)';
+                        return '6.本地AI+MCP自訂QA (Win10~C#)';
+                    case '85':
+                        return '8.雲端AI+OCR (Ububtu~Python)';
+                    case '87':
+                        return '9.雲端AI+OCR (Win10~C#)';
                     case '40':
-                        return '8.APM(應用系統監控)';
+                        return '11.APM(應用系統監控)';
+                    case '42':
+                        return '7.Log服務流程圖';
                     case '80':
-                        return '7.OPEN DATA-出口統計';
+                        return '10.OPEN DATA-出口統計';
                     case '50':
-                        return '9.資源監控-CPU、Memory、HardDisk';
+                        return '12.資源監控-CPU、Memory、HardDisk';
                     case '52':
-                        return '10.IIS監控';
+                        return '13.IIS監控';
                     case '60':
-                        return '11.EventLog分析';
+                        return '14.EventLog分析';
                     case '75':
-                        return '12.AD帳號與人資系統(HRIS)同步服務~手機版';
+                        return '15.AD帳號與人資系統(HRIS)同步服務~手機版';
                     default:
                         return '其它語言髒話';
                 }

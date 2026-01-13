@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "UKNxiMRLXUw=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Administrator\\Documents\\Visual Studio 18\\Projects\\TestCSharp14\\TestCSharp14\\TestCSharp14.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.23.0\\microsoft.visualstudio.azure.containers.tools.targets.1.23.0.nupkg.sha512"
+  ],
+  "logs": []
+}

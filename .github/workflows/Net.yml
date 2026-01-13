@@ -1,0 +1,32 @@
+name: .NET 10 CI
+
+on:
+  push:
+    branches: [ Dev1 ]
+  pull_request:
+    branches: [ Dev1]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest   # 或 windows-latest，看你需求（大部分用 ubuntu 就夠快又便宜）
+
+    steps:
+    - name: 拉下來程式碼
+      uses: actions/checkout@v4   # 建議用 v4 或更新
+
+    - name: 安裝 .NET 10 SDK
+      uses: actions/setup-dotnet@v5   # 目前最新版用 v5（v4 也還行）
+      with:
+        dotnet-version: |
+          8.0.x
+          9.0.x
+          10.0.x
+
+    - name: 還原 NuGet 套件
+      run: dotnet restore ./Test/TestCSharp14/TestCSharp14.csproj
+
+    - name: 編譯專案
+      run: dotnet build --configuration Release --no-restore ./Test/TestCSharp14/TestCSharp14.csproj
+
+    - name: 執行專案
+      run: dotnet ./Test/TestCSharp14/bin/Release/net10.0/TestCSharp14.dll

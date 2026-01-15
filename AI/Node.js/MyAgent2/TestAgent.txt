@@ -1,0 +1,5 @@
+codex
+
+/skills
+請以HTTP Get測試'http://localhost'
+請以HTTP Get測試'http://localhost:5000/WeatherForecast'

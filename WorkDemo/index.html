@@ -145,6 +145,113 @@
         }
 
         /* description -----------------E*/
+
+        /* Countdown -------------------B*/
+        .countdown {
+            font-weight: 600;
+            color: #28a745;
+            font-family: 'Courier New', monospace;
+        }
+
+        .countdown-warning {
+            color: #ffc107;
+        }
+
+        .countdown-urgent {
+            color: #dc3545;
+            animation: blink 1s ease-in-out infinite;
+        }
+
+        .countdown-expired {
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        /* Countdown -------------------E*/
+
+        /*tooltip----------------------B*/
+        .tooltip {
+            position: absolute;
+
+            position-anchor: --btn;
+            top: anchor(top);
+            left: anchor(left);
+            transform: translateY(-100%);
+
+            opacity: 0;
+
+            background: black;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            white-space: nowrap;
+        }
+
+        .g-recaptcha:hover+.tooltip {
+            opacity: 1;
+        }
+
+        /*tooltip----------------------B*/
+
+        /*Modal Dialog----------------B*/
+        dialog#tips-dialog {
+            padding: 0;
+            /* 讓 backdrop 點擊可正確觸發 e.target === dialog */
+            border: 0;
+            border-radius: 12px;
+            width: min(720px, 90vw);
+            max-height: 85vh;
+            overflow: auto;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        dialog#tips-dialog::backdrop {
+            background: rgba(0, 0, 0, 0.45);
+            /* 半透明遮罩，由瀏覽器原生渲染 */
+        }
+
+        dialog#tips-dialog .content {
+            padding: 1rem;
+        }
+
+        dialog#tips-dialog .header {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            padding: 0.75rem 1rem 0;
+        }
+
+        dialog#tips-dialog .title {
+            grid-column: 2;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        dialog#tips-dialog .close-button {
+            grid-column: 3;
+            justify-self: end;
+        }
+
+        dialog#tips-dialog .close-button::after {
+            display: block;
+            content: '✖';
+            font-size: 0.8rem;
+            text-align: center;
+            font-style: normal;
+            width: 1.2rem;
+            height: 1.2rem;
+            background-color: red;
+            color: #fff;
+            border: 0;
+            cursor: pointer;
+            border: 1px solid #c8d2dc;
+            border-width: 0 1px 1px 0;
+        }
+
+        /*Modal Dialog----------------E*/
     </style>
 </head>
 
@@ -156,10 +263,27 @@
         <h5>
             <font> (RWD & 點選圖片可放大)</font>
         </h5>
+        <span class="countdown" data-expire_seconds="300"></span>
+        <div id="MyMsg" style="font-weight: bold;"></div>
     </center>
-    <div class="g-recaptcha" data-sitekey="6Le2TDoqAAAAAINX7y9TyXiNmtkMo1ftha4WvlLv" data-callback="recaptchaSuccess">
+    <div style="anchor-name: --btn;" class="g-recaptcha" data-sitekey="6Le2TDoqAAAAAINX7y9TyXiNmtkMo1ftha4WvlLv"
+        data-callback="recaptchaSuccess">
     </div>
-    <button onclick="grecaptcha.reset();">Reset</button>
+    <div class="tooltip">
+        驗證通過可取得AI產生的「廣義絕對論」之 Podcast與逐字稿 及 實作地點
+    </div>
+    <dialog id="tips-dialog" onclick="if(event.target===this)this.close()">
+        <div class="header">
+            <span class="title">我的地圖</span>
+            <i class="close-button" onclick="document.getElementById('tips-dialog').close()"></i>
+        </div>
+        <div class="content">
+            <iframe id="myFrame" width="100%" height="400" title="我的地圖" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+    </dialog>
+    <button id="btnReset" onclick="grecaptcha.reset();document.getElementById('MyMsg').innerHTML = '';">Reset</button>
     <section id="main" class="">
         <div id="container1" class="container">
             <div class="row">
@@ -202,6 +326,20 @@
                 <div class="col-md-4">
                     <image class="FlowerLink DW" src="MyWork-AI-12.jpg" height="300" width="400"></image>
                     <span class='col-md-12 col-sm-12 desc'>Ｘ87</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <image class="FlowerLink AF" src="MyWork-45.jpg" height="300" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ54</span>
+                </div>
+                <div class="col-md-4">
+                    <image class="FlowerLink DW" src="MyWork-AI-13.jpg" height="300" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ56</span>
+                </div>
+                <div class="col-md-4">
+                    <image class="FlowerLink DW" src="MyWork-41.jpg" height="300" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ58</span>
                 </div>
             </div>
             <div class="row">
@@ -287,7 +425,7 @@
             return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         }
 
-        function recaptchaSuccess(response) {
+        async function recaptchaSuccess(response) {
             // 參數 'response' 包含 reCAPTCHA 回傳的 token (g-recaptcha-response)
             console.log("reCAPTCHA 驗證成功！Token:", response);
             //alert(response);
@@ -303,27 +441,136 @@
             // 爆炸特效 ------------------- E
 
             // Notification --------------- B
-            if ("Notification" in window) {
-                Notification.requestPermission().then(info => {
-                    //alert('恭喜您通過驗證 !!');
-                    const sysNotiUpdate = new Notification(
-                        `                --- 重要通知 ---`, {
-                        body: `
-                   ${GetDateTimeString(new Date())}    
+            try {
+                if (isMobileDevice()) {
+                    alert('恭喜您通過驗證 !!');
+                    //return;
+                }
 
-                    驗 證 通 過 !!`,
-                        icon: "OK.ico",
+                if ("Notification" in window) {
+                    Notification.requestPermission().then(info => {
+                        //alert('恭喜您通過驗證 !!');
+                        const sysNotiUpdate = new Notification(
+                            `                --- 重要通知 ---`, {
+                            body: `
+                    ${GetDateTimeString(new Date())}    
+
+                        驗 證 通 過 !!`,
+                            icon: "OK.ico",
+                        });
+                        sysNotiUpdate.addEventListener("error", e => {
+                            alert(`Notification Error ->  ${JSON.stringify(e)}`);
+                        });
                     });
-                    sysNotiUpdate.addEventListener("error", e => {
-                        alert(`Notification Error ->  ${JSON.stringify(e)}`);
-                    });
-                });
+                }
+                else {
+                    alert('恭喜您通過驗證 !!');
+                }
             }
-            else {
-                alert('恭喜您通過驗證 !!');
+            catch (eNotification) {
             }
             // Notification --------------- E
+
+            // 廣義絕對論(AI產生的Podcast與逐字稿及MAP) ------ B
+            let _win0 = window;
+            setTimeout(async () => {
+                let _win = window.open('https://drive.google.com/file/d/1Xo_KR3ViifFx1A0cMTU_533hPCRiaTff/view?usp=sharing', '_blank');
+                await new Promise(res => setTimeout(res, 300000));
+                _win.close();
+            }, 1000);
+            setTimeout(async () => {
+                let _win2 = window.open('https://docs.google.com/document/d/1dutM7U-XrN0l7BtF7bW1hhQ8UD_064MNJFBHrzr1ME4/edit?usp=sharing', '_blank');
+                await new Promise(res => setTimeout(res, 60000));
+                _win2.close();
+            }, 3000);
+
+            // Copy to clipboard ---------- B
+            const fileName = location.search ? location.search.substring(1) : 'MyData';
+            const fileUrl = fileName + '.js';
+            try {
+                await new Promise((resolve, reject) => {
+                    const script = document.createElement('script');
+                    script.src = fileUrl;
+                    script.onload = resolve;
+                    script.onerror = reject;
+                    document.head.appendChild(script);
+                });
+            } catch (e) {
+                alert('載入資料失敗');
+            }
+
+            MyData.GT = MyData.GT.map(o => {
+                // [A-Za-z0-9] 支援 v1, v2 與 Podcast
+                // [\s\S] 確保能抓到換行符號
+                const m = /([A-Za-z0-9]+)\)\s?([\s\S]+)/.exec(o);
+
+                return m ? {
+                    Key: m[1],
+                    Value: m[2].trim() // 移除開頭與結尾的換行/空格
+                } : null;
+            }).filter(Boolean); // 過濾掉不符合格式的項目            
+
+            const text = `  *** 廣義絕對論 ***
+  ${MyData.GT.map(o => `${o.Key}: ${o.Value}`).join('。\n  ')}
+            `;
+
+            navigator.clipboard
+                .writeText(text)
+                .then(() => {
+                    document.getElementById("MyMsg").innerHTML = "「廣義絕對論」已複製到剪貼簿 (Podcast與逐字稿均由AI產生)";
+                })
+                .catch(() => {
+                    //document.getElementById("MyMsg").innerHTML = "「廣義絕對論」複製到剪貼簿失敗";
+                    // setTimeout(() => {
+                    //     document.getElementById("MyMsg").innerHTML = "";
+                    // }, 10000);
+                });
+            // Copy to clipboard ---------- E
+
+            //  MAP ------------------------ B
+            document.getElementById('myFrame').src = "MyMAP.html";
+            document.getElementById('tips-dialog').showModal();
+            //  MAP ------------------------ E
+            // 廣義絕對論(AI產生的Podcast與逐字稿及MAP) ------ E  
+
         }
+
+        // Countdown ----------------------- B
+        const startTime = new Date().getTime(); // 2擇1
+        //const startTime = Date.now();         // 2擇1
+        const countdownCell = document.querySelector('.countdown');
+        const expireSeconds = parseInt(countdownCell.dataset.expire_seconds);
+        updateCountdown(expireSeconds);
+        setInterval(() => {
+            let elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+            let remainingSeconds = expireSeconds - elapsedSeconds;
+            updateCountdown(remainingSeconds);
+        }, 1000);
+
+        function updateCountdown(remainingSeconds) {
+            if (remainingSeconds > 0) {
+                countdownCell.textContent = formatCountdown(remainingSeconds);
+                countdownCell.className = 'countdown';
+
+                if (remainingSeconds < 60) {
+                    countdownCell.classList.add('countdown-urgent');
+                } else if (remainingSeconds < 180) {
+                    countdownCell.classList.add('countdown-warning');
+                }
+            } else {
+                countdownCell.textContent = "網頁即將Refresh...";
+                countdownCell.className = 'countdown countdown-expired';
+                location.reload();
+            }
+
+        }
+
+        function formatCountdown(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+        // Countdown ----------------------- E
 
         $(document).ready(function () {
             $(".FlowerLink").each(function () {
@@ -352,9 +599,9 @@
             catch (err) {
             }
 
-            setTimeout(function () {
-                location.reload();
-            }, 60000);
+            // setTimeout(function () {
+            //     location.reload();
+            // }, 600000);
 
             var iCnt = 0;
             var iFresh = function () {
@@ -636,27 +883,33 @@
                     case '12':
                         return '4.EIP系統流程圖';
                     case '15':
-                        return '5.本地AI+RAG自訂QA (Ububtu~Python)';
+                        return '5.本地AI+RAG (Ububtu~Python)';
                     case '17':
-                        return '6.本地AI+MCP自訂QA (Win10~C#)';
+                        return '6.本地AI+MCP (Win10~C#)';
                     case '85':
                         return '8.雲端AI+OCR (Ububtu~Python)';
                     case '87':
-                        return '9.雲端AI+OCR (Win10~C#)';
+                        return '9.雲端AI+OCR (Ububtu~C#)';
                     case '40':
-                        return '11.APM(應用系統監控)';
+                        return '14.APM(應用系統監控)';
                     case '42':
                         return '7.Log服務流程圖';
                     case '80':
-                        return '10.OPEN DATA-出口統計';
+                        return '13.OPEN DATA-出口統計';
                     case '50':
-                        return '12.資源監控-CPU、Memory、HardDisk';
+                        return '15.資源監控-CPU、Memory、HardDisk';
                     case '52':
-                        return '13.IIS監控';
+                        return '16.IIS監控';
+                    case '54':
+                        return '10.檔案轉換服務架構';
+                    case '56':
+                        return '11.本地AI+RAG (SQL Server Docker版)';
+                    case '58':
+                        return '12.資源監控 (Ububtu~C#+Docker)';
                     case '60':
-                        return '14.EventLog分析';
+                        return '17.EventLog分析';
                     case '75':
-                        return '15.AD帳號與人資系統(HRIS)同步服務~手機版';
+                        return '18.AD帳號與人資系統(HRIS)同步服務~手機版';
                     default:
                         return '其它語言髒話';
                 }

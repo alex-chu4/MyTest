@@ -1,0 +1,35 @@
+name: 機器人自動更新範例
+
+on:
+  push:
+    branches: [ Dev5 ] # 當 Dev5 分支有新的推送時觸發
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: 複製專案程式碼到機器人環境中
+    - name: 複製程式碼
+      uses: actions/checkout@v4
+
+    # Step 2: 讓機器人執行修改程式碼的動作
+    - name: 修改檔案內容
+      run: |
+        echo "最後更新時間: $(date)" >> readme.txt
+
+    # Step 3: 設定機器人身分並推回 GitHub
+    - name: 機器人自動提交與推送
+      run: |
+        # 1. 設定我們剛剛說的身分
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@://github.com"
+        
+        # 2. 檢查有沒有檔案被修改，有的話才執行提交
+        git add readme.txt
+        if ! git diff-index --quiet HEAD; then
+          git commit -m "🤖 自動更新: 更新最後修改時間 [skip ci]"
+          git push
+        else
+          echo "沒有任何改變，跳過提交。"
+        fi

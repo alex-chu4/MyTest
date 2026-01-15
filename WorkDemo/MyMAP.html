@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyMap</title>
+    <link rel="stylesheet" href="leaflet.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 24px;
+            font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #eef2f7, #f8fafc);
+            color: #1f2937;
+        }
+
+        h1 {
+            margin-bottom: 16px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        #info {
+            margin: 12px 0;
+            padding: 12px 16px;
+            background: #ffffffcc;
+            backdrop-filter: blur(6px);
+            border-left: 4px solid #3b82f6;
+            border-radius: 8px;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        #info.error {
+            border-left-color: #e74c3c;
+            color: #e74c3c;
+        }
+
+        #map {
+            width: 100%;
+            height: 560px;
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+        }
+
+        #hover-coords {
+            margin-top: 6px;
+            padding: 6px 12px;
+            background: #fff;
+            border-left: 4px solid #27ae60;
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: monospace;
+            color: #27ae60;
+        }
+
+        #getLocation {
+            padding: 10px 18px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: #fff;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        #getLocation:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Phase 2: 自訂座標輸入面板樣式 */
+        #customCoordInput {
+            margin: 12px 0;
+            padding: 16px;
+            background: #ffffffcc;
+            backdrop-filter: blur(6px);
+            border-left: 4px solid #f59e0b;
+            border-radius: 10px;
+            font-size: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        #locationMode {
+            padding: 8px 12px;
+            border: 1px solid #cbd5f5;
+            border-radius: 6px;
+            font-size: 13px;
+            min-width: 140px;
+            background: #f8fafc;
+            color: #0f172a;
+        }
+
+        #customCoordInput input[type="number"] {
+            padding: 8px 12px;
+            border: 1px solid #cbd5f5;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: monospace;
+            width: 110px;
+            background: #f8fafc;
+            color: #0f172a;
+            transition: border 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+
+        #customCoordInput input[type="number"]:disabled {
+            background: #e5e7eb;
+            color: #6b7280;
+            cursor: not-allowed;
+        }
+
+        #customCoordInput input[type="number"]:focus {
+            outline: none;
+            border-color: #6366f1;
+            background: #ffffff;
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25), 0 0 10px rgba(99, 102, 241, 0.35);
+        }
+
+        /* error state */
+        #customCoordInput input.error {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.25), 0 0 10px rgba(239, 68, 68, 0.45);
+        }
+
+        #moveToCoord {
+            padding: 10px 18px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            background: linear-gradient(135deg, #f59e0b, #ea580c);
+            color: #fff;
+            border-radius: 8px;
+            white-space: nowrap;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        #moveToCoord:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(245, 158, 11, 0.4);
+        }
+
+        #moveToCoord:active {
+            background: #d35400;
+        }
+
+        /* Dark mode (auto) */
+        /* system dark */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(135deg, #0f172a, #020617);
+                color: #e5e7eb;
+            }
+
+            #info,
+            #customCoordInput {
+                background: rgba(17, 24, 39, 0.7);
+                color: #e5e7eb;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+            }
+
+            #info {
+                border-left-color: #60a5fa;
+            }
+
+            #customCoordInput {
+                border-left-color: #fbbf24;
+            }
+
+            #customCoordInput label {
+                color: #ffffff;
+            }
+
+            #locationMode {
+                background: #020617;
+                border: 1px solid #334155;
+                color: #e5e7eb;
+            }
+
+            #customCoordInput input[type="number"] {
+                background: #020617;
+                border: 1px solid #334155;
+                color: #e5e7eb;
+            }
+
+            #customCoordInput input[type="number"]:focus {
+                border-color: #818cf8;
+                box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.35), 0 0 12px rgba(129, 140, 248, 0.5);
+            }
+
+            #customCoordInput input.error {
+                border-color: #f87171;
+                box-shadow: 0 0 0 2px rgba(248, 113, 113, 0.35), 0 0 12px rgba(248, 113, 113, 0.6);
+            }
+
+            #map {
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+            }
+        }
+
+        /* manual dark override */
+        .force-dark body {
+            background: linear-gradient(135deg, #0f172a, #020617);
+            color: #e5e7eb;
+        }
+
+        .force-dark #info,
+        .force-dark #customCoordInput {
+            background: rgba(17, 24, 39, 0.7);
+            color: #e5e7eb;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .force-dark #info {
+            border-left-color: #60a5fa;
+        }
+
+        .force-dark #customCoordInput {
+            border-left-color: #fbbf24;
+        }
+
+        .force-dark #locationMode {
+            background: #020617;
+            border: 1px solid #334155;
+            color: #e5e7eb;
+        }
+
+        .force-dark #customCoordInput input[type="number"] {
+            background: #020617;
+            border: 1px solid #334155;
+            color: #e5e7eb;
+        }
+
+        .force-dark #customCoordInput input[type="number"]:focus {
+            border-color: #818cf8;
+            box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.35), 0 0 12px rgba(129, 140, 248, 0.5);
+        }
+
+        .force-dark #customCoordInput input.error {
+            border-color: #f87171;
+            box-shadow: 0 0 0 2px rgba(248, 113, 113, 0.35), 0 0 12px rgba(248, 113, 113, 0.6);
+        }
+
+        .force-dark #map {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+    <button id="themeToggle"
+        style="position:fixed;top:16px;right:16px;z-index:999;padding:8px 12px;border-radius:999px;border:none;cursor:pointer;background:#111827;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,0.3);">🌙</button>
+
+    <div id="app">
+        <div id="info" style="display:none;">
+            緯度: <span id="latitude">-</span> | 經度: <span id="longitude">-</span>
+        </div>
+        <div id="errorMessage" style="display:none;"></div>
+
+        <!-- Phase 1: 定位模式輸入表單 -->
+        <div id="customCoordInput">
+            <select id="locationMode">
+                <option value="current">目前位置</option>
+                <option value="presidentialOffice">[絕對論V1]實作地點(總統府)</option>
+                <option value="taipei101">[絕對論V2]實作地點(台北101)</option>
+                <option value="custom">自訂座標</option>
+            </select>
+            <input type="number" id="inputLatitude" placeholder="緯度" min="-90" max="90" value="25.033964" />
+            <input type="number" id="inputLongitude" placeholder="經度" min="-180" max="180" value="121.564468" />
+            <button id="moveToCoord">移動至座標</button>
+        </div>
+        <div id="map"></div>
+    </div>
+    <script src="leaflet.js"></script>
+    <script>
+        // theme toggle
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const root = document.documentElement;
+        const locationModeEl = document.getElementById('locationMode');
+        const inputLatitudeEl = document.getElementById('inputLatitude');
+        const inputLongitudeEl = document.getElementById('inputLongitude');
+        const moveToCoordBtn = document.getElementById('moveToCoord');
+        const taipei101 = {
+            latitude: 25.033964,
+            longitude: 121.564468
+        };
+        const presidentialOffice = {
+            latitude: 25.040052,
+            longitude: 121.511954
+        };
+
+        function setTheme(mode) {
+            if (mode === 'dark') {
+                root.classList.add('force-dark');
+                themeToggleBtn.textContent = '☀️';
+            } else {
+                root.classList.remove('force-dark');
+                themeToggleBtn.textContent = '🌙';
+            }
+            localStorage.setItem('theme', mode);
+        }
+
+        // init theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) setTheme(savedTheme);
+
+        themeToggleBtn.addEventListener('click', () => {
+            const isDark = root.classList.contains('force-dark');
+            setTheme(isDark ? 'light' : 'dark');
+        });
+        // 應用狀態
+        const appState = {
+            positionInfo: {},
+            errorMessage: '',
+            markers: []
+        };
+
+        // 更新 UI 函數
+        function updateUI() {
+            document.getElementById('latitude').textContent = appState.positionInfo.latitude || '-';
+            document.getElementById('longitude').textContent = appState.positionInfo.longitude || '-';
+            document.getElementById('errorMessage').textContent = appState.errorMessage;
+        }
+
+        // 顯示座標資訊
+        function showCoords(latitude, longitude) {
+            if (latitude === undefined || longitude === undefined) {
+                appState.positionInfo = {};
+                updateUI();
+                return;
+            }
+            appState.positionInfo = {
+                latitude: latitude.toFixed(6),
+                longitude: longitude.toFixed(6)
+            };
+            updateUI();
+        }
+
+        // 初始化Leaflet地圖，設定預設中心點和縮放等級
+        const map = L.map('map').setView([20, 0], 2);
+
+        // 加入OpenStreetMap圖磚
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap',
+            maxZoom: 19
+        }).addTo(map);
+
+        // 使用者位置標記及範圍圈
+        let userMarker = null;
+        let userAccuracyCircle = null;
+
+        // 縮放等級簡單對照表
+        const zoomLevels = {
+            WordMap: 2,
+            LargeCountry: 5,
+            RegionState: 8,
+            City: 11,
+            Neiberhood: 13,
+            Street: 15,
+            Block: 17,
+            Building: 19
+        }
+
+        function isCustomMode() {
+            return locationModeEl.value === 'custom';
+        }
+
+        function setInputEditable(editable) {
+            inputLatitudeEl.disabled = !editable;
+            inputLongitudeEl.disabled = !editable;
+        }
+
+        function setInputCoords(latitude, longitude) {
+            inputLatitudeEl.value = Number(latitude).toFixed(6);
+            inputLongitudeEl.value = Number(longitude).toFixed(6);
+        }
+
+        function updateMoveButtonLabel() {
+            const labels = {
+                current: '移動至目前位置',
+                presidentialOffice: '移動至[絕對論V1]實作地點(總統府)',
+                taipei101: '移動至[絕對論V2]實作地點(台北101)',
+                custom: '移動至自訂座標'
+            };
+
+            moveToCoordBtn.textContent = labels[locationModeEl.value] || '移動至座標';
+        }
+
+        function showLocation(position) {
+            // 測試經緯度: 25.033964, 121.564468 (台北101)
+            const { latitude, longitude, accuracy } = position.coords;
+
+            // 移除舊的使用者位置標記和精確度圈
+            if (userMarker) map.removeLayer(userMarker);
+            if (userAccuracyCircle) map.removeLayer(userAccuracyCircle);
+
+            // 加入範圍圈，半徑為精確度值
+            userAccuracyCircle = L.circle([latitude, longitude], {
+                radius: accuracy,
+                color: '#3388ff',
+                fillColor: '#3388ff',
+                fillOpacity: 0.1,
+                weight: 1
+            }).addTo(map);
+
+            // 加入使用者位置標記並顯示資訊
+            userMarker = L.marker([latitude, longitude])
+                .addTo(map)
+                .bindPopup(
+                    `<strong>現在位置</strong><br>
+             緯度: ${latitude.toFixed(6)}<br>
+             經度: ${longitude.toFixed(6)}<br>
+             精確度: ±${Math.round(accuracy)} m`
+                )
+                .openPopup();
+
+            // 飛至指定位置並設定適當縮放等級
+            map.flyTo([latitude, longitude], zoomLevels.Block, { duration: 1.5 });
+            setInputCoords(latitude, longitude);
+            showCoords(latitude, longitude);
+        }
+
+        function handleError(error) {
+            const messages = {
+                1: 'Permission denied. Please allow location access.',
+                2: 'Position unavailable. Unable to determine location.',
+                3: 'Request timed out. Try again.'
+            };
+            appState.errorMessage = messages[error.code] || 'An unknown error occurred.';
+            updateUI();
+        }
+        // 透過瀏覽器 Geolocation API 取得使用者位置(需經使用者同意)
+        function getLocation() {
+            if (!navigator.geolocation) {
+                appState.errorMessage = 'Geolocation is not supported by your browser.';
+                updateUI();
+                return;
+            }
+            appState.errorMessage = 'Detecting your location…';
+            updateUI();
+            navigator.geolocation.getCurrentPosition(showLocation, handleError, {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            });
+        }
+
+        // 滑鼠移動時顯示對應座標
+        map.on('mousemove', (e) => {
+            const lat = e.latlng.lat.toFixed(6);
+            const lng = e.latlng.lng.toFixed(6);
+
+            showCoords(e.latlng.lat, e.latlng.lng);
+            if (isCustomMode()) {
+                inputLatitudeEl.value = lat;
+                inputLongitudeEl.value = lng;
+            }
+        });
+        map.on('mouseout', () => {
+            showCoords();
+        });
+
+        // 點擊地圖時放置標記
+        map.on('click', (e) => {
+            const { lat, lng } = e.latlng;
+
+            if (isCustomMode()) {
+                setInputCoords(lat, lng);
+            }
+            showCoords(lat, lng);
+            map.flyTo([lat, lng], Math.max(map.getZoom(), zoomLevels.Block), { duration: 1.2 });
+
+            const m = L.marker([lat, lng])
+                .addTo(map)
+                .bindPopup(
+                    `<strong>自訂位置</strong><br>
+             緯度: ${lat.toFixed(6)}<br>
+             經度: ${lng.toFixed(6)}<br>
+             <a href="#" onclick="removeClickMarker(this); return false;" style="color:#e74c3c;">移除</a>`
+                )
+                .openPopup();
+            appState.markers.push(m);
+        });
+
+        function removeClickMarker(link) {
+            const popup = link.closest('.leaflet-popup');
+            const markerEl = popup?._leaflet_id != null ? popup : null;
+            // 找到對應的標記並移除
+            for (let i = appState.markers.length - 1; i >= 0; i--) {
+                const m = appState.markers[i];
+                if (m.isPopupOpen()) {
+                    map.removeLayer(m);
+                    appState.markers.splice(i, 1);
+                    break;
+                }
+            }
+        }
+
+        // Phase 3: 自訂座標輸入處理函數
+        function handleCustomCoords() {
+            const lat = parseFloat(inputLatitudeEl.value);
+            const lng = parseFloat(inputLongitudeEl.value);
+            const latEl = inputLatitudeEl;
+            const lngEl = inputLongitudeEl;
+
+            // reset error styles
+            latEl.classList.remove('error');
+            lngEl.classList.remove('error');
+
+            // 驗證輸入值
+            if (isNaN(lat) || isNaN(lng)) {
+                appState.errorMessage = '❌ 錯誤：請輸入有效的數字';
+                latEl.classList.add('error');
+                lngEl.classList.add('error');
+                updateUI();
+                return;
+            }
+
+            if (lat < -90 || lat > 90) {
+                appState.errorMessage = '❌ 錯誤：緯度必須在 -90 到 90 之間';
+                latEl.classList.add('error');
+                updateUI();
+                return;
+            }
+
+            if (lng < -180 || lng > 180) {
+                appState.errorMessage = '❌ 錯誤：經度必須在 -180 到 180 之間';
+                lngEl.classList.add('error');
+                updateUI();
+                return;
+            }
+
+            // 驗證成功 - 清除錯誤訊息
+            appState.errorMessage = '';
+            updateUI();
+
+            // 飛至指定座標
+            map.flyTo([lat, lng], zoomLevels.Block, { duration: 1.5 });
+
+            // 在該位置放置標記
+            const m = L.marker([lat, lng])
+                .addTo(map)
+                .bindPopup(
+                    `<strong>自訂位置</strong><br>
+             緯度: ${lat.toFixed(6)}<br>
+             經度: ${lng.toFixed(6)}<br>
+             <a href="#" onclick="removeClickMarker(this); return false;" style="color:#e74c3c;">移除</a>`
+                )
+                .openPopup();
+
+            // 將標記加入陣列
+            appState.markers.push(m);
+
+            // 更新座標顯示
+            showCoords(lat, lng);
+        }
+
+        function handleLocationModeChange() {
+            const mode = locationModeEl.value;
+            const customMode = mode === 'custom';
+
+            updateMoveButtonLabel();
+            setInputEditable(customMode);
+            inputLatitudeEl.classList.remove('error');
+            inputLongitudeEl.classList.remove('error');
+            appState.errorMessage = '';
+            updateUI();
+
+            if (mode === 'current') {
+                getLocation();
+                return;
+            }
+
+            if (mode === 'taipei101') {
+                setInputCoords(taipei101.latitude, taipei101.longitude);
+                handleCustomCoords();
+                return;
+            }
+
+            if (mode === 'presidentialOffice') {
+                setInputCoords(presidentialOffice.latitude, presidentialOffice.longitude);
+                handleCustomCoords();
+            }
+        }
+
+        function handleMoveAction() {
+            if (locationModeEl.value === 'current') {
+                getLocation();
+                return;
+            }
+
+            if (locationModeEl.value === 'taipei101') {
+                setInputCoords(taipei101.latitude, taipei101.longitude);
+            } else if (locationModeEl.value === 'presidentialOffice') {
+                setInputCoords(presidentialOffice.latitude, presidentialOffice.longitude);
+            }
+
+            handleCustomCoords();
+        }
+
+        // 按鈕事件監聽
+        locationModeEl.addEventListener('change', handleLocationModeChange);
+        document.getElementById('moveToCoord').addEventListener('click', handleMoveAction);
+
+        // 支援 Enter 鍵提交
+        inputLatitudeEl.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && isCustomMode()) handleMoveAction();
+        });
+        inputLongitudeEl.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && isCustomMode()) handleMoveAction();
+        });
+
+        window.addEventListener('load', () => {
+            locationModeEl.value = 'taipei101';
+            handleLocationModeChange();
+        });
+    </script>
+</body>
+
+</html>

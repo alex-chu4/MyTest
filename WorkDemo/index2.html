@@ -206,6 +206,20 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
+                    <image class="FlowerLink AF" src="MyWork-45.jpg" height="300" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ54</span>
+                </div>
+                <div class="col-md-4">
+                    <image class="FlowerLink DW" src="MyWork-AI-13.jpg" height="300" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ56</span>
+                </div>
+                <div class="col-md-4">
+                    <image class="FlowerLink DW" src="MyWork-41.jpg" height="300" width="400"></image>
+                    <span class='col-md-12 col-sm-12 desc'>Ｘ58</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
                     <image class="FlowerLink DW" src="MyWork-80.png" height="300" width="400"></image>
                     <span class='col-md-12 col-sm-12 desc'>Ｘ80</span>
                 </div>
@@ -326,7 +340,7 @@
 
             setTimeout(function () {
                 location.reload();
-            }, 60000);
+            }, 600000);
 
             var iCnt = 0;
             var iFresh = function () {
@@ -394,26 +408,49 @@
             // 爆炸特效 ------------------- E
 
             // Notification --------------- B
-            if ("Notification" in window) {
-                Notification.requestPermission().then(info => {
-                    //alert('恭喜您通過驗證 !!');
-                    const sysNotiUpdate = new Notification(
-                        `                --- 重要通知 ---`, {
-                        body: `
-                   ${GetDateTimeString(new Date())}    
+            try {
+                if (isMobileDevice()) {
+                    alert('恭喜您通過驗證 !!');
+                    //return;
+                }
 
-                    驗 證 通 過 !!`,
-                        icon: "OK.ico",
+                if ("Notification" in window) {
+                    Notification.requestPermission().then(info => {
+                        //alert('恭喜您通過驗證 !!');
+                        const sysNotiUpdate = new Notification(
+                            `                --- 重要通知 ---`, {
+                            body: `
+                    ${GetDateTimeString(new Date())}    
+
+                        驗 證 通 過 !!`,
+                            icon: "OK.ico",
+                        });
+                        sysNotiUpdate.addEventListener("error", e => {
+                            alert(`Notification Error ->  ${JSON.stringify(e)}`);
+                        });
                     });
-                    sysNotiUpdate.addEventListener("error", e => {
-                        alert(`Notification Error ->  ${JSON.stringify(e)}`);
-                    });
-                });
+                }
+                else {
+                    alert('恭喜您通過驗證 !!');
+                }
             }
-            else {
-                alert('恭喜您通過驗證 !!');
+            catch (eNotification) {
             }
             // Notification --------------- E
+
+            // 廣義絕對論(AI Podcast與逐字稿) ------ B
+            let _win0 = window;
+            setTimeout(async () => {
+                let _win = window.open('https://drive.google.com/file/d/1Xo_KR3ViifFx1A0cMTU_533hPCRiaTff/view?usp=sharing', '_blank');
+                await new Promise(res => setTimeout(res, 300000));
+                _win.close();
+            }, 1000);
+            setTimeout(async () => {
+                let _win2 = window.open('https://docs.google.com/document/d/1dutM7U-XrN0l7BtF7bW1hhQ8UD_064MNJFBHrzr1ME4/edit?usp=sharing', '_blank');
+                await new Promise(res => setTimeout(res, 60000));
+                _win2.close();
+            }, 3000);
+            // 廣義絕對論(AI Podcast與逐字稿) ------ E   
         }
 
         async function Download(Urls, isBadguy) {
@@ -696,7 +733,8 @@
                         jobs.reduce((p, job) => p.then(() => job()), Promise.resolve())
                             .then(() => {
                                 //let _win = window.open(window.location.href.replace(window.location.href.split('/').pop(), 'GeneralAbsolutism.gif'), '_blank');
-                                let _win = window.open('https://drive.google.com/file/d/1aU3EgdPAGBXUMkj8BQnx5Bf4ZaFmbMng/view', '_blank');
+                                //let _win = window.open('https://drive.google.com/file/d/1aU3EgdPAGBXUMkj8BQnx5Bf4ZaFmbMng/view', '_blank');
+                                let _win = window.open('https://drive.google.com/file/d/1-i5_xAuKqR5N4u_c3QgxQNrYvDjVs9I1/view?usp=drive_link', '_blank');
                                 setTimeout(() => {
                                     _win.close();
                                     //}, 3000);
@@ -721,27 +759,33 @@
                     case '12':
                         return '4.EIP系統流程圖';
                     case '15':
-                        return '5.本地AI+RAG自訂QA (Ububtu~Python)';
+                        return '5.本地AI+RAG (Ububtu~Python)';
                     case '17':
-                        return '6.本地AI+MCP自訂QA (Win10~C#)';
+                        return '6.本地AI+MCP (Win10~C#)';
                     case '85':
                         return '8.雲端AI+OCR (Ububtu~Python)';
                     case '87':
-                        return '9.雲端AI+OCR (Win10~C#)';
+                        return '9.雲端AI+OCR (Ububtu~C#)';
                     case '40':
-                        return '11.APM(應用系統監控)';
+                        return '14.APM(應用系統監控)';
                     case '42':
                         return '7.Log服務流程圖';
                     case '80':
-                        return '10.OPEN DATA-出口統計';
+                        return '13.OPEN DATA-出口統計';
                     case '50':
-                        return '12.資源監控-CPU、Memory、HardDisk';
+                        return '15.資源監控-CPU、Memory、HardDisk';
                     case '52':
-                        return '13.IIS監控';
+                        return '16.IIS監控';
+                    case '54':
+                        return '10.檔案轉換服務架構';
+                    case '56':
+                        return '11.本地AI+RAG (SQL Server Docker版)';
+                    case '58':
+                        return '12.資源監控 (Ububtu~C#+Docker)';
                     case '60':
-                        return '14.EventLog分析';
+                        return '17.EventLog分析';
                     case '75':
-                        return '15.AD帳號與人資系統(HRIS)同步服務~手機版';
+                        return '18.AD帳號與人資系統(HRIS)同步服務~手機版';
                     default:
                         return '其它語言髒話';
                 }

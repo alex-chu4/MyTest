@@ -1,0 +1,10 @@
+codex
+
+/skills
+廣義絕對論 ?
+廣義絕對論 1.0 ?
+廣義絕對論 2.0 ?
+廣義絕對論 3.0 ?
+請以HTTP Get測試'http://localhost'
+請以HTTP Get測試'http://localhost:5000/WeatherForecast'
+請以HTTP Get測試'https://www.google.com'

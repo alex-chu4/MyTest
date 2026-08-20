@@ -16,7 +16,7 @@ jobs:
     # Step 2: 讓機器人執行修改程式碼的動作
     - name: 修改檔案內容
       run: |
-        echo "最後更新時間: $(date)" > readme.txt
+        echo "最後更新時間: $(date)" >> readme.txt
 
     # Step 3: 設定機器人身分並推回 GitHub
     - name: 機器人自動提交與推送

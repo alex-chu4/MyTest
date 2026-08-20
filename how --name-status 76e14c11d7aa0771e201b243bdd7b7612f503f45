@@ -1,0 +1,29 @@
+[33mcommit 76e14c11d7aa0771e201b243bdd7b7612f503f45[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mDev2[m[33m)[m
+Author: chu alex <alex-chu4@outlook.com>
+Date:   Tue Aug 25 20:11:27 2026 +0800
+
+    TestDeleteRestore
+
+[33mcommit d19d471dade68ea154b956939c079abea3f4653d[m
+Author: chu alex <alex-chu4@outlook.com>
+Date:   Tue Aug 25 19:55:51 2026 +0800
+
+    TestDelete
+
+[33mcommit 5a92550d9d4609a8bcc25d5c4714af537ee87c91[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;31mMyTest2/master[m[33m)[m
+Author: chu alex <alex-chu4@outlook.com>
+Date:   Mon Jan 5 11:37:25 2026 +0800
+
+    git rebase -i --root
+
+[33mcommit 3ed750ac7d64fd90189c53ec99174dfbd86f7ccd[m
+Author: chu alex <alex-chu4@outlook.com>
+Date:   Mon Jan 5 11:37:25 2026 +0800
+
+    Init
+
+[33mcommit b3f79d041578f71c5c7d579d674501e868b92154[m[33m ([m[1;31morigin/Dev2[m[33m)[m
+Author: chu alex <alex-chu4@outlook.com>
+Date:   Mon Jan 5 11:37:25 2026 +0800
+
+    Init

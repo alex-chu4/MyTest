@@ -1,4 +1,5 @@
-name: 機器人自動更新範例2
+name: 機器人自動更新範例
+
 on:
   push:
     branches: [ Dev5 ] # 當 Dev5 分支有新的推送時觸發
@@ -6,11 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    # 必須給予權限，機器人才能開 PR 和寫入內容
-    permissions:
-      contents: write
-      pull-requests: write
 
     steps:
     # Step 1: 複製專案程式碼到機器人環境中
@@ -22,17 +18,18 @@ jobs:
       run: |
         echo "最後更新時間: $(date)" >> readme.txt
 
-    # Step 3: 自動建立 Pull Request
-    - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v7
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        committer: github-actions[bot] <41898282+github-actions[bot]@://github.com>
-        author: github-actions[bot] <41898282+github-actions[bot]@://github.com>
-        branch: bot-auto-update # 機器人會自己開這個新分支來放修改後的程式碼
-        base: Dev5             # 目標是要合併回 Dev5 分支
-        title: "🤖 自動更新: 更新最後修改時間"
-        body: |
-          此 PR 由 GitHub Actions 自動建立。
-          更新了 `readme.txt` 的最後修改時間。
-        commit-message: "🤖 自動更新: 更新最後修改時間 [skip ci]"
+    # Step 3: 設定機器人身分並推回 GitHub
+    - name: 機器人自動提交與推送
+      run: |
+        # 1. 設定我們剛剛說的身分
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@://github.com"
+        
+        # 2. 檢查有沒有檔案被修改，有的話才執行提交
+        git add readme.txt
+        if ! git diff-index --quiet HEAD; then
+          git commit -m "🤖 自動更新: 更新最後修改時間 [skip ci]"
+          git push
+        else
+          echo "沒有任何改變，跳過提交。"
+        fi

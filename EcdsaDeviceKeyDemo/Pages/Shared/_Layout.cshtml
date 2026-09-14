@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ECDSA Device Key Demo</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" asp-page="/Index" aria-label="ECDSA Device Key Demo 首頁">
+            <span class="brand-mark">EK</span>
+            <span>ECDSA Device Key</span>
+        </a>
+        <span class="header-badge">NET 10</span>
+    </header>
+
+    @RenderBody()
+
+    <footer class="site-footer">
+        <span>Demo only · WebCrypto ECDSA P-256</span>
+        <a href="https://dotblogs.com.tw/donmadotblog/2026/09/11/webcrypto-ecdsa-device-key-csharp-verify" rel="noopener noreferrer">參考文章</a>
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

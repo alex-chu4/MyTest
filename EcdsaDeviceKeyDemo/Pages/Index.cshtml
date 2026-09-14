@@ -1,0 +1,71 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Created By 股神1";
+}
+
+<main class="page-shell">
+    <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">ASP.NET Core 10 · WebCrypto · ECDSA P-256</p>
+        <h1 id="page-title">用 Device Key 證明瀏覽器仍持有私鑰</h1>
+        <p class="hero-copy">
+            私鑰只留在瀏覽器的 WebCrypto；Server 只保存 SPKI 公鑰，並透過一次性 nonce challenge 驗證簽章。
+            這個範例延伸自文章中的 Sign / Verify 流程，避免固定訊息造成 Replay。
+        </p>
+        <div class="flow" aria-label="驗證流程">
+            <span>Browser 產生 Key Pair</span><b>→</b><span>Register Public Key</span><b>→</b><span>取得 Challenge</span><b>→</b><span>Private Key Sign</span><b>→</b><span>C# Verify</span>
+        </div>
+    </section>
+
+    <section class="demo-grid" aria-label="Device Key 操作">
+        <article class="card step-card">
+            <div class="step-number">01</div>
+            <h2>建立瀏覽器金鑰</h2>
+            <p>使用不可匯出的 ECDSA P-256 私鑰。瀏覽器支援時會將 CryptoKey Pair 保存到 IndexedDB。</p>
+            <div class="meta-row"><span>Device ID</span><code id="device-id">載入中…</code></div>
+            <div class="meta-row"><span>Key 狀態</span><strong id="key-state">尚未載入</strong></div>
+            <button id="prepare-key" class="button primary" type="button">產生／載入金鑰</button>
+        </article>
+
+        <article class="card step-card">
+            <div class="step-number">02</div>
+            <h2>註冊 Public Key</h2>
+            <p>只將 SubjectPublicKeyInfo（SPKI）公鑰以 Base64 傳給 Server，私鑰不會離開瀏覽器。</p>
+            <div class="meta-row"><span>Server 狀態</span><strong id="registration-state">尚未註冊</strong></div>
+            <button id="register-key" class="button" type="button" disabled>Register Public Key</button>
+        </article>
+
+        <article class="card step-card">
+            <div class="step-number">03</div>
+            <h2>Challenge / Sign / Verify</h2>
+            <p>Server 產生 2 分鐘有效的一次性 nonce；Browser 用私鑰簽章，Server 以公鑰驗證後消耗 Challenge。</p>
+            <div class="meta-row"><span>最近驗證</span><strong id="verification-state">尚未驗證</strong></div>
+            <button id="prove-key" class="button" type="button" disabled>取得 Challenge 並簽章</button>
+        </article>
+    </section>
+
+    <section class="card activity-card" aria-labelledby="activity-title">
+        <div class="activity-header">
+            <div>
+                <p class="eyebrow">LIVE RESULT</p>
+                <h2 id="activity-title">操作紀錄</h2>
+            </div>
+            <button id="clear-key" class="button subtle" type="button">清除本機金鑰</button>
+        </div>
+        <div id="status" class="status info" role="status" aria-live="polite">準備就緒。請先產生／載入金鑰。</div>
+        <pre id="log" class="log" aria-label="API 操作紀錄"></pre>
+    </section>
+
+    <section class="notes" aria-labelledby="notes-title">
+        <h2 id="notes-title">這個 Demo 沒有替你解決的問題</h2>
+        <ul>
+            <li>記憶體 Store 只適合單機示範；正式環境請使用資料庫與分散式的一次性消耗交易。</li>
+            <li>Device Key 不是登入授權，也不能抵禦 XSS；仍需身分驗證、CSP、輸入驗證、Rate Limit 與適當的 CSRF 策略。</li>
+            <li>HTTPS 是正式環境必要條件。重新註冊同一 Device ID 會讓舊 Challenge 失效。</li>
+        </ul>
+    </section>
+</main>
+
+@section Scripts {
+    <script src="~/js/device-key.js" asp-append-version="true"></script>
+}

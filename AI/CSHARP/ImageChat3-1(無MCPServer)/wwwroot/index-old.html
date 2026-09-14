@@ -1,0 +1,658 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        AI聊天室 (支援圖片上傳)
+    </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        #messages {
+            min-height: 240px;
+            max-height: 240px;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            line-height: 1.4;
+        }
+
+        .user {
+            background: #1a73e8;
+            color: white;
+            align-self: flex-end;
+        }
+
+        .bot {
+            background: #e8f0fe;
+            color: #000;
+            align-self: flex-start;
+        }
+
+            .bot strong {
+                color: navy;
+            }
+
+        .input-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-top: 1px solid #ddd;
+            background: #fafafa;
+        }
+
+        #input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 24px;
+            resize: none;
+        }
+
+        button {
+            padding: 10px 16px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 24px;
+            cursor: pointer;
+        }
+
+            button:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+        #attach {
+            background: #34a853;
+        }
+
+        /* 進度條區域整體垂直排列 */
+        #uploadProgress {
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* 每個進度條之間的間距 */
+            margin: 12px 0;
+            padding: 0 16px;
+        }
+
+        /* 單個進度容器 */
+        .progress-item {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* 預覽圖片區域改為垂直排列 */
+        #preview {
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* 每張預覽圖之間的間距 */
+            padding: 0 16px 12px;
+            max-height: 400px;
+            overflow-y: auto; /* 如果太多圖片會出現捲軸 */
+        }
+
+        /* 預覽圖片容器樣式 ---------B */
+        /* 單張預覽圖樣式 */
+        .preview-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .preview-item img {
+            max-width: 120px;
+            max-height: 120px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .preview-item .info {
+            flex: 1;
+        }
+
+        .preview-item .del {
+            background: #d93025;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3); /* 可選：增加一點陰影更立體 */
+            padding: 0;
+        }
+
+        .preview-item .del:hover {
+            background: #b71c1c;
+            transform: scale(1.1);
+            transition: all 0.15s;
+        }
+        /* 預覽圖片容器樣式 ---------E */
+
+        #status {
+            text-align: center;
+            color: #666;
+            padding: 8px;
+        }
+
+        #clearBtn {
+            background: #d93025; /* 紅色警示 */
+            padding: 10px 16px;
+            border-radius: 24px;
+        }
+
+        #clearBtn:hover {
+            background: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div style="padding:3px; text-align:center; background:#1a73e8; color:white;">
+            <h2>
+                AI聊天室 (支援圖片Drag & Drop 分塊上傳 ~~~ ASP.NET Core + Ollama)
+            </h2>
+            <label>
+                模型：
+                <select id="model">
+                  <option value="deepseek-ocr:latest">deepseek-ocr:latest</option>
+                  <option value="llama3.2-vision:11b">llama3.2-vision:11b</option>
+                </select>
+            </label>
+        </div>
+
+        <div id="messages" style="white-space: pre;"></div>
+        <div id="preview"></div>
+
+        <div><center><h5>範例1. 兩個日期之間毫秒差 的Javascript程式碼?&nbsp;&nbsp;範例2. 請提取文字</h5></center></div>
+        <div class="input-area">
+            <textarea id="input" rows="1" placeholder="輸入訊息... (Enter 送出)"></textarea>
+            <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" multiple style="display:none;">
+            <button id="attach">📎</button>
+            <button id="send" disabled>送出</button>
+            <button id="clearBtn">清除</button>  <!-- 新增 -->
+        </div>
+
+        <div id="uploadProgress" style="margin: 10px 0; padding: 0 16px;"></div>
+
+        <div id="status"></div>
+
+        <input id="dummy" value="" style="border: none; outline: none; cursor: none; caret-color: transparent; " />
+    </div>
+
+    <script>
+        const messagesDiv = document.getElementById('messages');
+        const input = document.getElementById('input');
+        const sendBtn = document.getElementById('send');
+        const attachBtn = document.getElementById('attach');
+        const fileInput = document.getElementById('fileInput');
+        const previewDiv = document.getElementById('preview');
+        const status = document.getElementById('status');
+        const modelSelect = document.getElementById('model');
+
+        let pendingFileIds = [];        // 已上傳成功的 fileId 陣列
+        let currentEs = null;
+        let currentBotMsg = null;
+        let startTime = null;
+
+        function addMessage(role, content = '', isHtml = false) {
+            const div = document.createElement('div');
+            div.className = `message ${role}`;
+            if (isHtml) {
+                div.innerHTML = content;
+            } else {
+                div.textContent = content;
+            }
+            messagesDiv.appendChild(div);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            return div;
+        }
+
+        function appendToBot(textDelta) {
+            if (!currentBotMsg) {
+                currentBotMsg = addMessage('bot', '', true);
+            }
+            //currentBotMsg.innerHTML += textDelta.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;');
+            currentBotMsg.innerHTML += textDelta; //  style="white-space: pre;"  取代掉 換行和空格的轉換
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function updateUI() {
+            sendBtn.disabled = !input.value.trim() && pendingFileIds.length === 0;
+        }
+
+        input.addEventListener('input', updateUI);
+        input.addEventListener('keydown', e => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                send();
+            }
+        });
+
+        // ------------------ 上傳相關 ------------------------------------------------------------------B
+        attachBtn.onclick = () => fileInput.click();
+
+        fileInput.onchange = async () => {
+            status.textContent = '上傳中...';
+            for (const file of fileInput.files) {
+                if (!file.type.startsWith('image/')) continue;
+                const fileId = await uploadFileInChunks(file);
+                if (fileId) {
+                    pendingFileIds.push(fileId);
+                    addPreview(file, fileId);
+                }
+            }
+            status.textContent = '';
+            fileInput.value = '';
+            updateUI();
+        };
+
+        let uploadingTasks = new Map(); // file.name → { fileId, progressEl, statusEl, ... }
+
+        // 改寫 uploadFileInChunks 函式，加入進度顯示
+        async function uploadFileInChunks(file) {
+            const fileName = file.name;
+            const progressContainer = document.createElement('div');
+            progressContainer.style.margin = '8px 0';
+            progressContainer.innerHTML = `
+                    <div style="display:flex; justify-content:space-between; font-size:0.9em; margin-bottom:4px;">
+                        <span>${fileName} 上傳中...</span>
+                        <span class="percent">0%</span>
+                    </div>
+                    <div style="height:6px; background:#eee; border-radius:3px; overflow:hidden;">
+                        <div class="bar" style="height:100%; width:0%; background:#34a853; transition:width 0.2s;"></div>
+                    </div>
+                    <div class="status" style="font-size:0.85em; color:#666; margin-top:4px;"></div>
+                `;
+
+            const bar = progressContainer.querySelector('.bar');
+            const percentText = progressContainer.querySelector('.percent');
+            const statusText = progressContainer.querySelector('.status');
+
+            document.getElementById('uploadProgress').appendChild(progressContainer);
+            document.getElementById('dummy').focus();
+
+            uploadingTasks.set(fileName, {
+                progressBar: bar,
+                percentText,
+                statusText,
+                progressContainer
+            });
+
+            try {
+                // 1. 初始化
+                statusText.textContent = '正在初始化...';
+                const initRes = await fetch('/Ocr/init', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        fileName: file.name,
+                        fileSize: file.size,
+                        mimeType: file.type
+                    })
+                });
+
+                if (!initRes.ok) throw new Error('初始化失敗');
+                const { fileId } = await initRes.json();
+
+                //const CHUNK_SIZE = 5 * 1024 * 1024;
+                const CHUNK_SIZE = 0.01 * 1024 * 1024;
+                const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
+                //alert(totalChunks);
+
+                statusText.textContent = `分 ${totalChunks} 塊上傳中...`;
+
+                for (let i = 0; i < totalChunks; i++) {
+                    const start = i * CHUNK_SIZE;
+                    const end = Math.min(start + CHUNK_SIZE, file.size);
+                    const chunk = file.slice(start, end);
+
+                    const formData = new FormData();
+                    formData.append('chunk', chunk, `${fileName}.part${i}`);
+                    formData.append('chunkIndex', i);
+                    formData.append('totalChunks', totalChunks);
+                    formData.append('fileId', fileId);
+                    formData.append('fileName', file.name);
+
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', '/Ocr/chunk', true);
+
+                    // 進度監聽（只監聽當前 chunk）
+                    xhr.upload.onprogress = (e) => {
+                        if (!e.lengthComputable) return;
+                        const chunkLoaded = e.loaded;
+                        const chunkTotal = e.total;
+                        const chunkPercent = (chunkLoaded / chunkTotal) * 100;
+
+                        // 整體進度 = (已完成塊 + 當前塊進度) / 總塊
+                        const overall = ((i + (chunkLoaded / chunkTotal)) / totalChunks) * 100;
+                        bar.style.width = overall + '%';
+                        percentText.textContent = Math.round(overall) + '%';
+                    };
+
+                    // 完成單一 chunk
+                    await new Promise((resolve, reject) => {
+                        xhr.onload = () => {
+                            if (xhr.status === 200) {
+                                resolve();
+                            } else {
+                                reject(new Error(`塊 ${i + 1} 上傳失敗: ${xhr.status}`));
+                            }
+                        };
+                        xhr.onerror = () => reject(new Error('網路錯誤'));
+                        xhr.send(formData);
+                    });
+                }
+
+                // 所有塊上傳完成 → 後端已自動合併，此處只需更新 UI
+                statusText.textContent = '上傳完成，正在等待處理...';
+                bar.style.background = '#34a853';
+                percentText.textContent = '100%';
+
+                // 短暫延遲後移除進度條（或保留供查看）
+                setTimeout(() => {
+                    progressContainer.remove();
+                    uploadingTasks.delete(fileName);
+                }, 2000);
+
+                return fileId;
+
+            } catch (err) {
+                console.error(err);
+                statusText.textContent = '上傳失敗：' + err.message;
+                statusText.style.color = 'red';
+                bar.style.background = '#d93025';
+                throw err; // 讓外層捕捉
+            }
+        }
+
+        // ── 拖放檔案上傳 -------------------------------------B
+        const dropZone = document.querySelector('.container'); // 或 document.body / #messages
+        let dragCounter = 0;
+
+        function preventDefault(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        // 拖曳進入 / 離開 效果
+        ['dragenter', 'dragover'].forEach(event => {
+            dropZone.addEventListener(event, (e) => {
+                preventDefault(e);
+                dragCounter++;
+                dropZone.classList.add('drag-over');
+                status.textContent = '放開滑鼠以上傳圖片...';
+            });
+        });
+
+        ['dragleave', 'drop'].forEach(event => {
+            dropZone.addEventListener(event, (e) => {
+                preventDefault(e);
+                dragCounter--;
+                if (dragCounter === 0) {
+                    dropZone.classList.remove('drag-over');
+                    status.textContent = '';
+                }
+            });
+        });
+
+        dropZone.addEventListener('drop', async (e) => {
+            preventDefault(e);
+            dropZone.classList.remove('drag-over');
+
+            const files = e.dataTransfer?.files;
+            if (!files || files.length === 0) {
+                status.textContent = '未偵測到檔案';
+                setTimeout(() => status.textContent = '', 1500);
+                return;
+            }
+
+            // 只處理圖片
+            const imageFiles = Array.from(files).filter(f => f.type.startsWith('image/'));
+
+            if (imageFiles.length === 0) {
+                status.textContent = '請拖放圖片檔案（jpg/png/webp）';
+                setTimeout(() => status.textContent = '', 2000);
+                return;
+            }
+
+            status.textContent = `正在處理 ${imageFiles.length} 張拖放圖片...`;
+
+            for (const file of imageFiles) {
+                try {
+                    const fileId = await uploadFileInChunks(file);
+                    if (fileId) {
+                        pendingFileIds.push(fileId);
+                        addPreview(file, fileId);
+                        updateUI();
+                    }
+                } catch (err) {
+                    console.error(`拖放檔案 ${file.name} 上傳失敗`, err);
+                    status.textContent = `檔案 ${file.name} 上傳失敗`;
+                }
+            }
+
+            status.textContent = `已處理 ${imageFiles.length} 張圖片`;
+            setTimeout(() => status.textContent = '', 2000);
+        });
+        // ── 拖放檔案上傳 -------------------------------------E
+
+        // ── 點選選擇檔案上傳 ---------------------------------B
+        fileInput.onchange = async () => {
+            status.textContent = '開始處理上傳...';
+            const files = Array.from(fileInput.files);
+
+            for (const file of files) {
+                if (!file.type.startsWith('image/')) continue;
+                try {
+                    const fileId = await uploadFileInChunks(file);
+                    if (fileId) {
+                        pendingFileIds.push(fileId);
+                        addPreview(file, fileId); // 你原本的預覽函式
+                    }
+                } catch (e) {
+                    console.error(`檔案 ${file.name} 上傳失敗`, e);
+                }
+            }
+            status.textContent = '';
+            fileInput.value = '';
+            updateUI();
+        };
+        // ── 點選選擇檔案上傳 ---------------------------------E
+
+        function addPreview(file, fileId) {
+            const div = document.createElement('div');
+            div.className = 'preview-item';
+
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(file);
+            img.alt = file.name;
+
+            const info = document.createElement('div');
+            info.className = 'info';
+            info.innerHTML = `
+                    <div><strong>${file.name}</strong></div>
+                    <div style="font-size:0.85em; color:#666;">
+                        ${(file.size / 1024 / 1024).toFixed(2)} MB
+                    </div>
+                `;
+
+            const delBtn = document.createElement('button');
+            delBtn.className = 'del';
+            delBtn.textContent = '×';
+            delBtn.onclick = () => {
+                pendingFileIds = pendingFileIds.filter(id => id !== fileId);
+                div.remove();
+                updateUI();
+                // 可選：呼叫後端刪除
+                // fetch(`/Ocr/file/${fileId}`, { method: 'DELETE' });
+            };
+
+            div.appendChild(img);
+            div.appendChild(info);
+            div.appendChild(delBtn);
+
+            document.getElementById('preview').appendChild(div);
+        }
+        // ------------------ 上傳相關 ------------------------------------------------------------------E
+
+        async function send() {
+            startTime = performance.now();   // 開始計時
+            status.textContent = '';
+            const text = input.value.trim();
+            if (!text && pendingFileIds.length === 0) return;
+            if (!text) {
+                alert('訊息不可為為空!');
+                return;
+            }
+
+            let userHtml = text ? text.replace(/\n/g, '<br>') : '（僅圖片）';
+            if (pendingFileIds.length > 0) {
+                userHtml += ` <small>(附 ${pendingFileIds.length} 張圖)</small>`;
+            }
+            addMessage('user', userHtml, true);
+
+            const fileIds = [...pendingFileIds];
+            pendingFileIds = [];
+            previewDiv.innerHTML = '';
+            input.value = '';
+            updateUI();
+
+            status.textContent = '思考中...';
+
+            const payload = {
+                Model: modelSelect.value,
+                Text: text,
+                FileIds: fileIds
+            };
+
+            const es = new EventSource(`/chat/stream?data=${encodeURIComponent(JSON.stringify(payload))}`);
+            currentEs = es;
+            currentBotMsg = null;
+
+            es.onmessage = e => {
+                if (e.data.indexOf("[ERR]") == 0) {
+                    es.close();
+                    currentEs = null;
+                    status.textContent = "*** 錯誤 --> " + JSON.parse(e.data.replace("[ERR]", "")).error;
+                    return;
+                }
+
+                if (e.data === '[DONE]') {
+                    es.close();
+                    currentEs = null;
+                    status.textContent = '';
+
+                    if (startTime) {
+                        const durationMs = performance.now() - startTime;
+                        const sec = durationMs / 1000;
+
+                        let display = sec < 60
+                            ? Math.round(sec) + "秒"
+                            : (sec / 60).toFixed(1) + "分";
+
+                        status.textContent = "回覆處理時間: " + display + " ";
+                        appendToBot(`
+<small style="color:#666;">... 回覆完畢。(處理時間: ${display})</small>
+                       `);
+                    } else {
+                        status.textContent = '';
+                    }
+                    startTime = null;
+
+                    return;
+                }
+                try {
+                    status.textContent = '回覆中...';
+                    const { delta } = JSON.parse(e.data);
+                    if (delta) appendToBot(delta);
+                    document.getElementById('dummy').focus();
+                } catch { }
+            };
+
+            es.onerror = (event) => {
+                es.close();
+                currentEs = null;
+
+                console.error("AI回覆處理發生錯誤!");
+                status.textContent = "AI回覆處理發生錯誤!";
+            };
+        }
+
+        sendBtn.onclick = send;
+
+        // 取得清除按鈕
+        const clearBtn = document.getElementById('clearBtn');
+
+        // 清除所有狀態
+        clearBtn.onclick = () => {
+            // 1. 清空輸入框
+            input.value = '';
+
+            // 2. 清空待送出的圖片
+            pendingFileIds = [];
+
+            // 3. 移除所有預覽圖片
+            previewDiv.innerHTML = '';
+
+            // 4. 清空上傳進度區域
+            document.getElementById('uploadProgress').innerHTML = '';
+
+            // 5. （可選）清空整個聊天記錄
+            // 如果你想保留歷史對話，可以註解掉這一行
+            messagesDiv.innerHTML = '';
+
+            // 6. 更新送出按鈕狀態
+            updateUI();
+
+            // 7. 顯示提示（可選）
+            status.textContent = '已清除所有內容';
+            setTimeout(() => {
+                status.textContent = '';
+            }, 2000);
+        };
+
+        // 也可以在送出成功後自動呼叫部分清除（視需求）
+        // 例如：在 send() 函式最後加上：
+        // pendingFileIds = [];
+        // previewDiv.innerHTML = '';
+        // updateUI();
+    </script>
+</body>
+</html>

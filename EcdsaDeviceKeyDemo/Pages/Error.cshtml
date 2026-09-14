@@ -1,0 +1,18 @@
+@page
+@model ErrorModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<main class="page-shell narrow">
+    <section class="card error-card">
+        <p class="eyebrow">500 · SERVER ERROR</p>
+        <h1>發生未預期的錯誤</h1>
+        <p>請稍後再試。如果需要追查，請保留下列 Request ID。</p>
+        @if (Model.ShowRequestId)
+        {
+            <code>@Model.RequestId</code>
+        }
+        <p><a class="button primary" asp-page="/Index">回到 Demo</a></p>
+    </section>
+</main>
